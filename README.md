@@ -1,11 +1,6 @@
 # zairza_new
 
-to make changes to gh pages
-git add .
-git status  
-git commit -m 'commit message'
-git push origin master
-git checkout gh-pages // go to the gh-pages branch
-git rebase master // bring gh-pages up to date with master
-git push origin gh-pages // commit the changes
-git checkout master // return to the master branch
+recent changes:
+-> New page for all announcements created 
+-> common modules have been grouped together
+-> Editable data moved out json files

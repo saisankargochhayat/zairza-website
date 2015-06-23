@@ -1,0 +1,6 @@
+<a class="back" href="./../">Home</a>
+<div class="msg" ng-repeat="msg in announcements | orderBy:'-datetime'">
+  <a href="#/fullView/{{$index}}">
+    <span class="from">{{ msg.from }}</span><span class="subject">{{ msg.title }}</span><span class="date">{{ msg.datetime | date }}</span>
+  </a>
+</div>

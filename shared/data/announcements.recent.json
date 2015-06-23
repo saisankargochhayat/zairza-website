@@ -1,0 +1,17 @@
+[
+ {
+  "title": "Contribute to this Project!",
+  "body" : "You can fork this project on git hub !",
+  "img"  : "shared/images/shubham.jpg"
+ },
+ {
+  "title": "Content creation",
+  "body" : "New contents can be created by modifying \"data/announcement.all.json\" values.",
+  "img"  : "shared/images/yuna.jpg"
+ },
+ {
+  "title": "Classes for new session",
+  "body" : "Classes for new session to be started soon.",
+  "img"  : "shared/images/yuna.jpg"
+ }
+]
