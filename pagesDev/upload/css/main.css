@@ -1,0 +1,13 @@
+.head{
+	text-align: center;
+	vertical-align: middle;
+	background-color: #d92f26;
+	color: #f5f6f7;
+	font-family: 'Garamond';
+	margin-bottom: 5%;
+}
+.card{
+	background: #e6e6e6; 
+	box-shadow: 0 2px 5px rgba(0,0,0,0.75);
+	padding: 20px; 
+}

@@ -1,17 +1,1 @@
-[
- {
-  "title": "Contribute to this Project!",
-  "body" : "You can fork this project on git hub !",
-  "img"  : "shared/images/shubham.jpg"
- },
- {
-  "title": "Content creation",
-  "body" : "New contents can be created by modifying \"data/announcement.all.json\" values.",
-  "img"  : "shared/images/yuna.jpg"
- },
- {
-  "title": "Classes for new session",
-  "body" : "Classes for new session to be started soon.",
-  "img"  : "shared/images/yuna.jpg"
- }
-]
+[{"from":"Amol Palekar","datetime":1520694340000,"title":"Meeting","body":"There is a meeting for forth year student at 5:00 PM in front of college building.","img":"shared/images/yuna.jpg"},{"from":"Shubham Prasad","datetime":1520386780000,"title":"Content creation","body":"New contents can be created by using PagesDev tool","img":"shared/images/shubham.jpg"},{"from":"Shubham Prasad","datetime":1520224600000,"title":"Contribute to this Project!","body":"You can fork this project on git hub @https://github.com/shubham2192/zairza_new/ ","img":"shared/images/shubham.jpg"}]

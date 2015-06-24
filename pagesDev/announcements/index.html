@@ -1,0 +1,48 @@
+<!doctype html> 
+<html> 
+<head>
+	<meta charset="utf-8">
+    <title>Announcement Creator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../../shared/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head> 
+<body ng-app="msgFormApp">  
+	<div class="header"> 
+		<div class="container-fluid"> 
+			<div class='head'>
+				<h2><br>Create New Message<br>&nbsp;</h2>
+			</div>
+		</div> 
+	</div>
+
+	<div class="main" ng-controller="msgSubmit"> 
+		<div class="container">
+			<div class="row card">
+				<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+				<form id="form_msg" class="from">
+					<input type="text" class="form-control" id="from"  placeholder="Your Name"><br>
+					<input type="date" class="form-control" id="date" > <br>
+					<input type="text" class="form-control" id="title"  placeholder="Title"><br>
+					<input type="text" class="form-control" id="img"  placeholder="link to icon or /shared/images/yuna.jpg"><br>
+					<input type="password" class="form-control" id="key" placeholder="Authentication key"><br>
+					<input type="textarea" class="form-control" rows="3" id="body"  placeholder="Body"><br>
+					<button type="button" class="btn btn-success btn-block" ng-click="post();">
+						 Submit
+					</button>
+				</form>  
+				</div>
+			</div> 
+		</div>
+		<div class="container">
+			<div class="row card">
+				<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+			 		<span>{{retMsg}}</span> 
+				</div>
+			</div> 
+		</div> 
+	</div> 
+	<script src="./../../shared/js/angular.min.js"></script>
+	<script src="js/ngApp.js"></script> 
+</body> 
+</html>

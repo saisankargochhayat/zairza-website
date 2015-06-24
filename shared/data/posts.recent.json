@@ -1,12 +1,1 @@
-[
- {
-  "title" : "How to use search",
-  "img" : "shared/images/shubham.jpg",
-  "link" : "#"
- },
- {
-  "title" : "Introduction to HTML",
-  "img" : "shared/images/jon.png",
-  "link" : "#"
- }
-]
+[{"author":"RedHat","title":"How to host node.js server","link":"https://blog.openshift.com/run-your-nodejs-projects-on-openshift-in-two-simple-steps/","img":"https://blog.openshift.com/wp-content/uploads/imported/scaling_node_js.png"},{"author":"Shubham Prasad","title":"How to use search","img":"shared/images/shubham.jpg","link":"http://www.google.com"},{"author":"Jon Doe","title":"Introduction to HTML","img":"shared/images/jon.png","link":"http://www.google.com"},{"author":"Lena","title":"Passport  to UK ","img":"shared/images/yuna.jpg","link":"http://www.google.com"}]
