@@ -56,8 +56,9 @@ http.createServer(function(request,response){
 	
 
     if (request.method == 'GET') {
+      var fol = false;
       var my_path = url.parse(request.url).pathname;
-      if (my_path[my_path.length-1] == '/') {my_path+='index.html'};
+      if (my_path[my_path.length-1] == '/') {my_path+='index.html'; fol=true; }
       var full_path = path.join(process.cwd(),my_path);
     	
       fys.exists(full_path, function (exists) {
@@ -75,7 +76,8 @@ http.createServer(function(request,response){
                     	response.end();
                 	}  
                  	else{
-                    	response.writeHeader(200);  
+                      if (fol) {response.writeHeader(200,{"Content-Type": "text/html"}); }
+                       else{response.writeHeader(200);};
                     	response.write(file, "binary");  
                     	response.end();
                 	}
