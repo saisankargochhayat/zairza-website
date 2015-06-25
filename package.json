@@ -1,6 +1,6 @@
 {
 "scripts": {
-  "start": "node rcserver.js"
+  "start": "node rhserver.js"
  },
 "main": "rhserver.js",
 "dependencies":{"mkdirp":"0.5.1"}
