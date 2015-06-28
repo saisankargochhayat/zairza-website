@@ -16,9 +16,21 @@
 		</div> 
 	</div> 
 	<div class="main" ng-controller='HomeController'> 
-		<div class="container"> 
+		<div class="container">
+			<div class="row">					
+				<h4>
+					<a href="../"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+					<a href="/pagesDev/linkGenerator/">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+					<a href="/pagesDev/editposts/">
+					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+					<input ng-model="results" placeholder='filter..'></label>
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</h4>
+				<div>&nbsp;</div>				
+			</div> 
 			<div class="row">
-				<a ng-repeat="blog in blogs" ng-href="{{blog.link}}">
+				<a ng-repeat="blog in blogs| filter:results" ng-href="{{blog.link}}">
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 " style='margin-bottom: 2%;' >
 						<div class="card">
   							<span class="from">Author:{{ blog.author }}</span><br>

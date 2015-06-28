@@ -47,16 +47,34 @@ var postDataMsg = {
 	key : '',
 	img : ''
 };
+var postPicObj = {
+		target : "",
+		key : "",
+		base64Stream : ""
+},
+IsNewPic = false;
+
+var	insertnewpicture = function(DATA, KEY, name){
+	name = "/usr/images/"+name+"_"+Math.floor(Math.random()*100)+".jpg";
+	name = name.replace(/\s+/g, '_');
+	console.log("image renamed and given path: "+name);
+	postPicObj.target = name;
+	postPicObj.key = KEY;
+	postPicObj.base64Stream = DATA;
+	return name;
+}
 var parse = function(){
 			postDataMsg.author = document.getElementById('from').value;
 			postDataMsg.title = document.getElementById('title').value;
 			postDataMsg.link = document.getElementById('link').value;
+			postDataMsg.key = document.getElementById('key').value;
 			if (radid=='rad1') {
+				IsNewPic=false;
 				postDataMsg.img = document.getElementById('img-link').value;
 			} else{
-				postDataMsg.img = "data:image/png;base64,"+base64Stream;
+				IsNewPic=true;
+				postDataMsg.img = insertnewpicture(base64Stream,postDataMsg.key,postDataMsg.author);
 			};
-			postDataMsg.key = document.getElementById('key').value
 		}
 
 app.controller('msgSubmit',['$scope','$http',function($scope, $http){
@@ -64,6 +82,15 @@ app.controller('msgSubmit',['$scope','$http',function($scope, $http){
 		$scope.retMsg = "";
 		$scope.post = function(){
 			parse();
+			if (IsNewPic) {
+				$http.post('/inbound/newFile', postPicObj)
+			.success(function(data){
+					console.log("Img_post response : "+data);
+				})
+			.error(function(data){
+					console.log("Img_post response : "+data);
+				});
+			};
 			console.log(postDataMsg);
 			$http.post('/inbound/update', postDataMsg)
 			.success(function(data){
