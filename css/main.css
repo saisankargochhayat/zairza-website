@@ -31,21 +31,17 @@ body{
 	  display: inline;
 }
 .menu{
-	margin-top: 0px;
-	overflow: hidden;
 	background-color: #fd3755;
 	font-family: sans-serif;
 	box-shadow: 4px 3px 5px 0px rgba(46,33,35,1);
 }
-.menu li{
-	display: inline-block;
+.menu>li{
 	float: left;
 	width: 18%;
 	color: white;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	height: auto;
-	list-style: none;
+  list-style: none;
 }
 .menu li:hover{
 	background-color: #584f3d;
@@ -53,7 +49,10 @@ body{
 .menu li div{
 	text-align: center;
 }
-
+.menu a{
+  color: #fff;
+  text-decoration: none;
+}
 /*offCanvas support*/
 html,body{overflow-x:hidden;}
 @media screen and (max-width:767px){
@@ -76,15 +75,16 @@ html,body{overflow-x:hidden;}
 /*support end*/
 
 .author{
-	border-radius: 50%;
-	background-position: center;
 	width: 50px;
 	height: 50px;
-	display: inline-block;
-	float: left;
-	margin-right: 20px;
 }
-
+.aimg{
+  padding-top: 7px;
+}
+.writup h4,h5{
+  text-decoration: none;
+  color: #000;
+}
 .card{
 	vertical-align: middle;
 	margin-right: 10%;
@@ -102,6 +102,10 @@ html,body{overflow-x:hidden;}
 .announce:hover{
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.midP{
+  margin-top: 25px;
 }
 
 /*support for collection used in Announcement*/

@@ -22,9 +22,12 @@
 				<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 				<form id="form_msg" class="from">
 					<input type="text" class="form-control" id="from"  placeholder="Your Name"><br>
-					<input type="date" class="form-control" id="date" > <br>
+					<input type="date" class="form-control" id="date" placeholder="dd/mm/yyyy"><br>
 					<input type="text" class="form-control" id="title"  placeholder="Title"><br>
-					<input type="text" class="form-control" id="img"  placeholder="link to icon or /shared/images/yuna.jpg"><br>
+					<input type="radio" id="rad1" name='imgck' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" id="rad2" name='imgck'>Upload New Icon [max 6kb 100x100 pixels] 
+					<input type="text" class="form-control" id="img-link"  placeholder="link to icon eg /shared/images/yuna.jpg">
+					<input type="file" class="form-control" id="img-file" accept="image/jpeg"><br>
 					<input type="password" class="form-control" id="key" placeholder="Authentication key"><br>
 					<input type="textarea" class="form-control" rows="3" id="body"  placeholder="Body"><br>
 					<button type="button" class="btn btn-success btn-block" ng-click="post();">
@@ -43,6 +46,7 @@
 		</div> 
 	</div> 
 	<script src="./../../shared/js/angular.min.js"></script>
+	<script src="./../../shared/js/jquery-1.11.3.min.js"></script>
 	<script src="js/ngApp.js"></script> 
 </body> 
 </html>

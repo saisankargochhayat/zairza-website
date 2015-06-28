@@ -1,0 +1,63 @@
+body{
+	background-color: #eeeeee;
+	font-family: monospace;
+}
+.head{
+	text-align: center;
+	padding: 0.5% 0 0.5%;
+	vertical-align: middle;
+	background-color: #43494e;
+	color: #fff;
+	font-family: sans-serif;
+	margin-bottom: 1%;
+}
+.card{
+	background: #fff;
+	padding: 5px; 
+}
+.mem{
+  
+   margin-bottom: 0.5%;
+}
+.person{
+	border: 2px solid #eeeeee;
+	padding: 15px;
+}
+.person a{
+	text-decoration: none;
+	color: black;
+}
+.person a span{
+font-size: 1em;
+}
+.person a img{
+	width: 100px;
+	height: 100px;
+}
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+  max-height:40px;
+}
+
+.hideOverflow
+{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}

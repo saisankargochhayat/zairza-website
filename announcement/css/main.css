@@ -1,78 +1,34 @@
 body, html {
 	background: #f9f9f9; 
-	font-family: "Roboto", sans-serif; font-weight: 300; 
-} 
+	font-family: "Roboto", sans-serif;
+}
 .header {
+	text-align: center;
+	vertical-align: middle;
 	background: #aa08ff; 
-	box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-	text-align: center; 
-} 
-.header img {
-	margin: 20px auto; 
-	padding: 20px 0; 
-	text-align: center; 
-} 
-.header ul {
-	list-style: none; 
-} 
-.header li {
-	display: inline; 
-	margin-right: 30px; 
-} 
-.main {
-	margin: 40px 0; 
-} 
+	box-shadow: 0 2px 5px rgba(0,0,0,0.5); 
+	color: #f9f9f9;
+	margin-bottom: 5%;
+}
 .msg {
 	background: #fff; 
 	box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-	font-size: 18px; 
-	margin: 0 0 8px; 
-	padding: 20px 0; 
-} 
+	font-size: 18px;  
+	padding: 20px 0;
+	margin-bottom: 1%;
+}
 .msg:hover {
 	background: #fcfcfc; 
-	box-shadow: 0 3px 6px rgba(0,0,0,0.2); 
-	cursor: pointer; 
-} 
+	box-shadow: 0 3px 6px rgba(0,0,0,0.5);  
+}
 .msg span {
 	color: #000; 
-	display: inline-block; 
-	margin: 0; 
-	overflow: hidden; 
-	position: relative; 
+	overflow: hidden;  
 	text-overflow: ellipsis; 
-} 
-a.back {
-	background: #ffbd1a; 
-	box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-	color: #fff; 
-	display: block; 
-	font-weight: bold; 
-	margin: 0 0 20px; 
-	padding: 14px 0; 
-	text-align: center; 
-	width: 200px; 
-} 
-a.back:hover {
-	background: #f7a500; 
-	text-decoration: none; 
-} 
-.from {
-	font-size: 16px; 
-	font-weight: 700; 
-	padding-left: 2%; 
-	width: 20%; 
-} 
-.subject {
-	width: 65%; 
-} 
-.date {
-	font-size: 14px; 
-	padding-right: 2%; 
-	text-align: right; 
-	text-overflow: ellipsis; 
-	width: 15%; 
-	} 
+}
+.date{
+	text-align: right;
+}
 .msg-view {
 	background: #fff; 
 	box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
@@ -94,21 +50,3 @@ a.back:hover {
 	text-align: right; 
 	width: 50%; 
 } 
-.msg-view p {
-	font-size: 24px; 
-	margin: 30px 0 0; 
-} 
-.footer {
-	background:#000; 
-	padding:60px 0; 
-} 
-.footer h3 {
-	color:#fff; 
-	font-size:18px; 
-	font-weight:300; 
-} 
-.footer ul {
-	color:#0393ff; 
-	list-style:none; 
-	padding-left:0px;
-}

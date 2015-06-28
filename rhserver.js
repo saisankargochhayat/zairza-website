@@ -10,6 +10,29 @@ var mkdirp = require('mkdirp');
 
 var AuthKey = 'aA123' ;
 
+var recursive_path = function(Path){
+  fys.mkdir(Path,function(err){
+    if (err) {
+      if (err.errno==-4058 || err.errno==34 && err.code!='EEXIST') {
+        recursive_path(path.dirname(Path));
+        recursive_path(Path);
+      };
+    };
+  })
+};
+
+var writeFileRecursive = function(Full_Path, data){
+  var f_path = path.dirname(Full_Path);
+  fys.writeFile(Full_Path,data,function(err){
+    if (err){
+      if (err.errno==-4058 || err.errno==34 && err.code=='ENOENT') {
+          recursive_path(f_path);
+          writeFileRecursive(Full_Path, data);
+      }
+    } else{console.log(err);};
+  });
+};
+
 var writeObject = function (newObject, pathToResourse, replace){
   var fileObject = [];
   var filePath = path.join(process.cwd(),pathToResourse);
@@ -31,17 +54,18 @@ var writeObject = function (newObject, pathToResourse, replace){
 var writeFile = function(newfileObj){
   var filePath = path.join(process.cwd(),newfileObj.target);
   var fileBuffer = new Buffer(newfileObj.base64Stream, 'base64');
-  var folderPath = path.dirname(newfileObj.target);
-  mkdirp(folderPath, function (err) {
-    if (err){console.log(err);}
-    fys.writeFile(filePath, fileBuffer, function(err) 
-    {console.log(err); return err;});
-  });
-  
+  writeFileRecursive(filePath,fileBuffer);  
   return "success";
-};
+},
+updateFile = function(updatedObj){
+  console.log(updatedObj.target);
+  var fpath = path.join(process.cwd(),updatedObj.target);
+  fys.writeFile(fpath,JSON.stringify(updatedObj.fileObj),function(err){
+    console.log(err);
+  });
+}
 
-var keylessObj = function(obj){
+var keyless = function(obj){
   var newObj = obj;
   delete newObj.key;
   delete newObj.type;
@@ -58,14 +82,18 @@ http.createServer(function(request,response){
     if (request.method == 'GET') {
       var fol = false;
       var my_path = url.parse(request.url).pathname;
-      if (my_path[my_path.length-1] == '/') {my_path+='index.html'; fol=true; }
+      if (my_path[my_path.length-1] == '/') {my_path+='index.html'};
       var full_path = path.join(process.cwd(),my_path);
     	
       fys.exists(full_path, function (exists) {
 	  	    if(!exists){
               console.log("file not found: "+full_path);
+            if (path.extname(full_path)==".html") {
+              response.writeHead(302, {'Location': '/404.html'});
+            } else{
             	response.writeHeader(404, {"Content-Type": "text/plain"});  
-        	    response.write("404 Not Found\n");  
+        	    response.write("404 Not Found\n");
+            }  
     	        response.end();
 	        }
         	else{
@@ -76,8 +104,18 @@ http.createServer(function(request,response){
                     	response.end();
                 	}  
                  	else{
-                      if (fol) {response.writeHeader(200,{"Content-Type": "text/html"}); }
-                       else{response.writeHeader(200);};
+                      switch(path.extname(full_path))
+                      {
+                        case '.css': response.writeHeader(200,{"Content-Type": "text/css"});
+                        break;
+                        case '.html': response.writeHeader(200,{"Content-Type": "text/html"});
+                        break;
+                        case '.js': response.writeHeader(200,{"Content-Type": "text/javascript"});
+                        break;
+                        case '.pdf': response.writeHeader(200,{"Content-Type": "application/pdf"});
+                        break;
+                        default: response.writeHeader(200);
+                      }
                     	response.write(file, "binary");  
                     	response.end();
                 	}
@@ -114,15 +152,23 @@ http.createServer(function(request,response){
                   fulltarget='/shared/data/bugs.all.json'; 
                   previewtarget=''; //no preview
                   break;
+                case 'alumni': 
+                  fulltarget='/shared/data/alumni.json'; 
+                  previewtarget=''; //no preview
+                  break;
+                case 'member': 
+                  fulltarget='/shared/data/members.json'; 
+                  previewtarget=''; //no preview
+                  break;     
               }
-              var ret = writeObject(keylessObj(decodedBody),fulltarget,false);
-              if(decodedBody.update){
-                writeObject(keylessObj(decodedBody),previewtarget,true);
-              }
+              if (decodedBody.update) {
+                writeObject(keyless(decodedBody),previewtarget,true);
+              };
+              var ret = writeObject(keyless(decodedBody),fulltarget,false);
               if ( ret == 'success'){
                 response.writeHead(200, {'Content-Type': 'text/plain'});
                 response.write('New Entry Created');
-                response.write(JSON.stringify(keylessObj(decodedBody))+"@ \n");
+                response.write("@ \n");
                 response.end(JSON.stringify(new Date()));
               } else{
                 response.writeHead(200, {'Content-Type': 'text/plain'});
@@ -167,12 +213,38 @@ http.createServer(function(request,response){
             }
           });
       } 
-    	else {
-      	response.writeHead(404, 'Resource Not Found', {'Content-Type': 'text/plain'});
-      	response.end('404, Resource Not Found');
-    	}
-  	} 
+    	
+  	  else if (request.url === "/inbound/modify") {
+          var requestBody = '';
+          request.on('data', function(data) {
+            requestBody += data;
+            if(requestBody.length > 1e7) {
+                response.writeHead(413, 'Request Entity Too Large', {'Content-Type': 'text/plain'});
+                response.end('413, Request Entity Too Large');
+            }
+          });
+          request.on('end', function() {
+            var decodedBody = JSON.parse(requestBody);
+            if(decodedBody.key == AuthKey){
+              console.log(decodedBody);
+              updateFile(decodedBody);
+              response.writeHead(200, {'Content-Type': 'text/plain'});
+              response.end('successful modification @'+JSON.stringify(new Date()));
+            }
+            else{
+              response.writeHead(200, {'Content-Type': 'text/plain'});
+              response.end('Error : Key validation error');
+            }
+          });
+      }
 
+      //inbound type undefined
+      else {
+        response.writeHead(404, 'Resource Not Found', {'Content-Type': 'text/plain'});
+        response.end('404, Resource Not Found');
+      }
+
+    }   
   	else {
     response.writeHead(405, 'Method Not Supported', {'Content-Type': 'text/plain'})  ;
     return response.end('405: Method Not Supported');
