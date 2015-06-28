@@ -1,5 +1,12 @@
 # zairza_new
 
+[ fix ]
+-> Allpages in pagesDev
+
+[ fix ]
+-> search in blogs
+-> images in addlinks
+
 [new]
 -> Modify Alumni
 -> Modify people
