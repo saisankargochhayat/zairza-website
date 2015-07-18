@@ -1,6 +1,6 @@
 {
-  "name": "OpenShift-Sample-App",
-  "version": "1.0.0",
+  "name": "zairza",
+  "version": "1.5.0",
   "description": "zairza nodejs Application",
   "keywords": [
     "zairza",
@@ -18,21 +18,36 @@
     "type": "git",
     "url": "https://github.com/shubham2192/zairza_new"
   },
-
   "engines": {
     "node": ">= 0.6.0",
     "npm": ">= 1.0.0"
   },
-
   "dependencies": {
-    "mkdirp": "0.5.1"
+    "async": "~0.8.0",
+    "basic-auth": "^1.0.3",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.9.0",
+    "consolidate": "~0.10.0",
+    "cookie-parser": "^1.3.3",
+    "ejs": ">=0.0.0",
+    "express": ">=4.0.0",
+    "express-session": "^1.8.2",
+    "method-override": "^2.2.0",
+    "mongodb": "~1.3.23",
+    "mongoose": ">=3.8.1",
+    "morgan": "^1.3.2",
+    "passport": ">= 0.0.0",
+    "passport-google-oauth": ">= 0.0.0",
+    "passport-local": ">=0.1.6",
+    "passport-local-mongoose": "^1.0.1",
+    "swig": "~1.3.2",
+    "underscore": "~1.6.0",
+    "util": ">= 0.0.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
-
   "scripts": {
-  	"start": "node rhserver.js"
+    "start": "node server.js"
   },
-
-  "main": "rhserver.js"
+  "main": "server.js"
 }

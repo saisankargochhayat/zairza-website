@@ -1,0 +1,179 @@
+body{
+	background-color: #d5ffff;
+}
+.head{
+	background-color: #feabb8;
+	padding: 10px;
+	box-shadow: 4px 3px 5px 0px rgba(46,33,35,1);
+}
+#logo{
+	margin: 5px;
+	margin-right: 15px;
+	float: left;
+}
+#title{
+	font-family: "Roboto", sans-serif;
+	color: #80ffff;
+	font-size: 60px;
+	display: inline;
+	margin-top: -10px;
+}
+.shadow{
+ text-shadow: 0 0.032em 0 #b0b0b0, 0px 0.15em 0.11em rgba(0,0,0,0.15), 0px 0.25em 0.021em rgba(0,0,0,0.1), 0px 0.32em 0.32em rgba(0,0,0,0.1);
+ color: #FFF;
+}
+
+#subtitle{
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	color: #80ffff;
+}
+.top_name{
+	  display: inline;
+}
+.menu{
+	background-color: #fd3755;
+	font-family: sans-serif;
+	box-shadow: 4px 3px 5px 0px rgba(46,33,35,1);
+}
+.menu>li{
+	float: left;
+	width: 18%;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+  list-style: none;
+}
+.menu li:hover{
+	background-color: #584f3d;
+}
+.menu li div{
+	text-align: center;
+}
+.menu a{
+  color: #fff;
+  text-decoration: none;
+}
+/*offCanvas support*/
+html,body{overflow-x:hidden;}
+@media screen and (max-width:767px){
+	.row-offcanvas{
+		position:relative;
+		-webkit-transition:all .25s ease-out;
+		-o-transition:all .25s ease-out;
+		transition:all .25s ease-out;
+	}
+	.row-offcanvas-right{right:0;}
+	.row-offcanvas-left{left:0;}
+	.row-offcanvas-right
+	.sidebar-offcanvas{right:-50%;}
+	.row-offcanvas-left
+	.sidebar-offcanvas{left:-50%;}
+	.row-offcanvas-right.active{right:50%;}
+	.row-offcanvas-left.active{left:50%;}
+	.sidebar-offcanvas{position:absolute;top:0;width:50%;}
+}
+/*support end*/
+
+.author{
+	width: 50px;
+	height: 50px;
+}
+.aimg{
+  padding-top: 7px;
+}
+.writup h4,h5{
+  text-decoration: none;
+  color: #000;
+}
+.card{
+	vertical-align: middle;
+	margin-right: 10%;
+	margin-bottom: 5%;
+	background-color: #ffffff;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+.card:hover{
+	box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+
+.announce{
+	font-family: sans-serif;
+}
+.announce:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.midP{
+  margin-top: 25px;
+}
+
+/*support for collection used in Announcement*/
+.collection {
+  list-style: none;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative; }
+  .collection .collection-item {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0; }
+    .collection .collection-item.avatar {
+      min-height: 84px;
+      padding-left: 72px;
+      position: relative; }
+      .collection .collection-item.avatar .circle {
+        position: absolute;
+        width: 42px;
+        height: 42px;
+        overflow: hidden;
+        left: 15px;
+        display: inline-block;
+        vertical-align: middle; }
+      .collection .collection-item.avatar i.circle {
+        font-size: 18px;
+        line-height: 42px;
+        color: #fff;
+        background-color: #999;
+        text-align: center; }
+      .collection .collection-item.avatar .title {
+        font-size: 16px;}
+      .collection .collection-item.avatar p {
+        margin: 0; }
+      .collection .collection-item.avatar .secondary-content {
+        position: absolute;
+        top: 16px;
+        right: 16px; }
+    .collection .collection-item:last-child {
+      border-bottom: none; }
+    .collection .collection-item.active {
+      background-color: #26a69a;
+      color: #eafaf9; }
+  .collection a.collection-item {
+    display: block;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    -ms-transition: 0.25s;
+    transition: 0.25s;
+    color: #26a69a; }
+    .collection a.collection-item:not(.active):hover {
+      background-color: #ddd; }
+  .collection.with-header .collection-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px; }
+  .collection.with-header .collection-item {
+    padding-left: 30px; }
+  .collection.with-header .collection-item.avatar {
+    padding-left: 72px; }
+
+.secondary-content {
+  float: right;
+  color: #26a69a; }	
+
+  /*end of collection*/

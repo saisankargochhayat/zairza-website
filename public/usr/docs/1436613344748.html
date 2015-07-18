@@ -1,0 +1,136 @@
+<html>
+<head>
+    <title><h3>bumblebee</h3></title>
+	<script src="/shared/js/jquery-1.11.3.min.js"></script>
+	<script src="/shared/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <link type="text/css" rel="stylesheet" href="/shared/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/bs.css" />
+    <script type="text/javascript">
+    var fid = 1436613344748 ;
+    jQuery(document).ready(function($){
+        $.getJSON( "/getTagByFileId", { fileId: fid} )
+        .done(function( response ) {
+            $.each(response.tagArray, function(index, value){
+                $('#tagField').append(
+                    '<a href="/getTagByName?tagName='+value+'">'
+                    + value
+                    + '&nbsp;'
+                    + '</a>')
+            })
+
+            $('#noOfViews').html(response.views);    
+        })
+        .fail(function( jqxhr, textStatus, error ) {
+            var err = textStatus + ", " + error;
+            console.log( "Request Failed: " + err );
+        });
+    })
+
+    </script>
+</head>
+<body>
+	<!--Head same as base index-->
+    <nav class="navbar navbar-inverse" id="navbar1">
+        <div class="container-fluid">
+            <div class=""><h3 id="navblue">Tutorials &amp; Project Documentation</h3></div>
+            <!-- logo and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#headNavbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="headNavbar">
+                <ul class="nav navbar-nav">
+                   <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Robotics</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/tutorials/#manual">Manual</a></li>
+                            <li><a href="/tutorials/#elec">Electronics</a></li>
+                            <li><a href="/tutorials/#avr">Avr</a></li>
+                            <li><a href="/tutorials/#arduino">Arduino</a></li>
+                            <li><a href="/tutorials/#misc">Miscellaneous</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Software</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/tutorials/#web">Web Development</a></li>
+                            <li><a href="/tutorials/#lang">Languages</a></li>
+                            <li><a href="/tutorials/#standalone">Standalone Apps</a></li>
+                            <li><a href="/tutorials/#else">Everything Else</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Automobile</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/tutorials/#sae">SAE</a></li>
+                            <li><a href="/tutorials/#asme">ASME</a></li>
+                            <li><a href="/tutorials/#Amisc">Miscellaneous</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!--Head ends-->
+    <!--bar starts-->
+    <div class="container-fluid" id="topbar" >
+        <div class="row" id="statusBar">
+            <div class="col-md-12 col-lg-10 col-lg-offset-1">
+                <span id="statusText" class="barText">
+                File id: #1436613344748&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                category: Robotics|Manual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Views: <span id='noOfViews'></span>
+                </span>
+                <a href="/tutorials/editor/" id="create"><span class="glyphicon glyphicon-plus">&nbsp;New</span></a>
+            </div> 
+        </div>
+    </div>
+    <!--bar Ends-->
+    <!--Main Edit page starts-->
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-lg-offset-2 AR">
+                <!--Editor title-->
+                <div ><h3>bumblebee</h3></div>
+                <br />
+                <div>Tags <span id="tagField"></span></div>
+                <br />
+                <!--Contributers-->
+                <div ><h5><i>akashwani</i></h5></div>
+                <br />
+                <!--Main Article-->
+                <div ><h4>Bach Yuri!</h4></div>
+            </div>
+            <div class="col-md-2" role="complementary">
+                <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
+                    <ul class="nav bs-docs-sidenav" id='sidenav'>
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div> 
+            <div class="col-lg-8 col-md-12 col-lg-offset-2" id="disqus_thread"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'zairza';
+    
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+</body>
+</html>

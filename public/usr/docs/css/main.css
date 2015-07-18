@@ -1,0 +1,66 @@
+.container-fluid{
+    padding-left:0;
+    padding-right:0;
+}
+#navblue{
+    color:#27a7df;
+    padding-left:9.5%;
+}
+#headNavbar{
+    padding-left:8.5%;
+}
+.wh{
+    color:#fff;
+}
+.blankSpace{
+    width:10%;
+}
+#navbar1{
+    margin:0px;
+    border:hidden;
+    border-radius:0;
+    box-shadow:none;
+}
+
+#topbar{
+    clear:both;
+    padding-top:0px;
+    padding-left:1%;
+    padding-right:1%;
+}
+#statusBar{
+    background-color:#9999ff;
+    padding:15px 7px 15px 4px;
+    margin-bottom:0px;
+}
+
+.barText{
+    font-family:sans-serif;
+}
+
+#statusText{
+    color:#fff;
+}
+
+#create{
+    float:right;
+    color:#fff;
+}
+#create:hover{
+    cursor:pointer;
+}
+
+.AR{
+    border:1px solid black;
+    margin-top:1em;
+    padding-top:2em;
+    padding-bottom:2em;
+}
+#mainbody{
+   width:885px;
+    max-width:886px;
+    border:none;
+}
+.bs-docs-sidebar{
+position:fixed;
+}

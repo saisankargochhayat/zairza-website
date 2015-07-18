@@ -1,0 +1,56 @@
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+	$('#img-file').hide();
+	$('input[type=radio]').click(function(){
+    	radid = this.id;
+       if (this.id == 'rad1') {
+    	$('#img-link').show();
+    	$('#img-file').hide();
+    } else{
+    	$('#img-link').hide();
+    	$('#img-file').show();
+    };
+	});
+	});
+
+	if (window.File && window.FileReader && window.FileList && window.Blob) {
+    document.getElementById('img-file').addEventListener('change', handleFileSelect, false);
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+};
+</script>
+
+	<div class="main"> 
+		<div class="container">
+			<div class="row card">
+				<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+				<form id="form_msg" class="from">
+					<input type="text" class="form-control" id="name"  placeholder="Name"><br>
+					<input type="text" class="form-control" id="year"  placeholder="Passout batch"><br>
+					<input type="radio" id="rad1" name='imgck' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" id="rad2" name='imgck'>Upload New Icon [max 200x200 pixels] 
+					<input type="text" class="form-control" id="img-link"  placeholder="link to icon eg /shared/images/yuna.jpg">
+					<input type="file" class="form-control" id="img-file" accept="image/jpeg"><br>
+					<input type="text" class="form-control" id="wentTo"  placeholder="Currently Placed at.."><br>
+					<input type="telephone" class="form-control" id="phone"  placeholder="telephone"><br>
+					<input type="email" class="form-control" id="mail"  placeholder="Mail id"><br>
+					<input type="text" class="form-control" id="link"  placeholder="link to your website or Profile"><br>
+					<button type="button" class="btn btn-success btn-block" ng-click="post();">
+					  Submit changes
+					</button>
+					<button type="button" id='btnDel' class="btn btn-danger btn-block" ng-click="del();">
+					  Delete Permanently
+					</button>
+				</form>  
+				</div>
+			</div> 
+		</div>
+		<div class="container">
+			<div class="row card">
+				<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+			 		<span>{{retMsg}}</span> 
+				</div>
+			</div> 
+		</div> 
+	</div> 
+	

@@ -1,0 +1,52 @@
+body, html {
+	background: #f9f9f9; 
+	font-family: "Roboto", sans-serif;
+}
+.header {
+	text-align: center;
+	vertical-align: middle;
+	background: #aa08ff; 
+	box-shadow: 0 2px 5px rgba(0,0,0,0.5); 
+	color: #f9f9f9;
+	margin-bottom: 5%;
+}
+.msg {
+	background: #fff; 
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+	font-size: 18px;  
+	padding: 20px 0;
+	margin-bottom: 1%;
+}
+.msg:hover {
+	background: #fcfcfc; 
+	box-shadow: 0 3px 6px rgba(0,0,0,0.5);  
+}
+.msg span {
+	color: #000; 
+	overflow: hidden;  
+	text-overflow: ellipsis; 
+}
+.date{
+	text-align: right;
+}
+.msg-view {
+	background: #fff; 
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+	padding: 50px; 
+	} 
+.msg-view h2 {
+	font-size: 40px; 
+	padding: 0; 
+	margin: 0 0 10px; 
+} 
+.msg-view .from {
+	display: inline-block; 
+	padding: 0; 
+	width: 50%; 
+} 
+.msg-view .date {
+	display: inline-block; 
+	padding: 0; 
+	text-align: right; 
+	width: 50%; 
+} 

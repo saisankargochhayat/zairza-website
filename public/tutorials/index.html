@@ -1,0 +1,291 @@
+<html>
+<head>
+    <title>Tutorials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="/shared/js/jquery-1.11.3.min.js"></script>
+	<script src="/shared/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <link type="text/css" rel="stylesheet" href="/shared/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<!--Head same as base index-->
+    <nav class="navbar navbar-inverse" id="navbar1">
+        <div class="container-fluid">
+            <div class=""><h3 id="navblue">Tutorials &amp; Project Documentation</h3></div>
+            <!-- logo and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#headNavbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="headNavbar">
+                <ul class="nav navbar-nav">
+                   <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Robotics</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#manual">Manual</a></li>
+                            <li><a href="#elec">Electronics</a></li>
+                            <li><a href="#avr">Avr</a></li>
+                            <li><a href="#arduino">Arduino</a></li>
+                            <li><a href="#misc">Miscellaneous</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Software</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#web">Web Development</a></li>
+                            <li><a href="#lang">Languages</a></li>
+                            <li><a href="#standalone">Standalone Apps</a></li>
+                            <li><a href="#else">Everything Else</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Automobile</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#sae">SAE</a></li>
+                            <li><a href="#asme">ASME</a></li>
+                            <li><a href="#Amisc">Miscellaneous</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!--Head ends-->
+    <div class='container-fluid hidden-sm hidden-md hidden-xs' id='bodycontainer'>
+        <div class='row' id="mainOuterRow">
+            <div class='col-lg-10 col-lg-offset-1'>
+                <div class='row'>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="#robotics" class='darken'>
+                                <img src="images/robotics.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="#software" class='darken'>
+                                <img src="images/software.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="#automobile" class='darken'>
+                                <img src="images/automobile.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="/projects/#onging" class='darken'>
+                                <img src="images/ongoing.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="/projects/" class='darken'>
+                                <img src="images/projects.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="/events/" class='darken'>
+                                <img src="images/event.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- fix for small devices -->
+    <div class='container hidden-lg' id='bodycontainer'>
+        <div class='row' id="mainOuterRow">
+            <div class='col-lg-10 col-lg-offset-1'>
+                <div class='row'>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="#robotics" class='darken'>
+                                <img src="images/robotics.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="#software" class='darken'>
+                                <img src="images/software.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="#automobile" class='darken'>
+                                <img src="images/automobile.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="/projects/#onging" class='darken'>
+                                <img src="images/ongoing.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="/projects/" class='darken'>
+                                <img src="images/projects.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                        <div>
+                            <a href="/events/" class='darken'>
+                                <img src="images/event.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--robotics-->
+    <div class='container-fluid' id='robotics'>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <div class='jumbotron'>
+                    <h1>Robotics</h1>
+                    <hr>
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><a href="#manual">Manual</a></li>
+                        <li role="presentation"><a href="#avr">AVR</a></li>
+                        <li role="presentation"><a href="#arduino">Arduino</a></li>
+                        <li role="presentation"><a href="#elec">Electronics</a></li>
+                        <li role="presentation"><a href="#misc">Miscellaneous</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row'>        
+            <div class='col-lg-12' id='manual'>
+                <div class="page-header">
+                    <h1><small>Manual</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='avr'>
+                <div class="page-header">
+                    <h1><small>Avr</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='arduino'>
+                <div class="page-header">
+                    <h1><small>Arduino</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='elec'>
+                <div class="page-header">
+                    <h1><small>Electronics</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='misc'>
+                <div class="page-header">
+                    <h1><small>Miscellaneous</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--software-->
+    <div class='container-fluid' id='software'>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <div class='jumbotron'>
+                    <h1>Software</h1>
+                    <hr>
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><a href="#web">Web Development</a></li>
+                        <li role="presentation"><a href="#lang">Languages</a></li>
+                        <li role="presentation"><a href="#standalone">Standalone Apps</a></li>
+                        <li role="presentation"><a href="#else">Everything Else</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row'>        
+            <div class='col-lg-12' id='web'>
+                <div class="page-header">
+                    <h1><small>Web Development</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='lang'>
+                <div class="page-header">
+                    <h1><small>Languages</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='standalone'>
+                <div class="page-header">
+                    <h1><small>Standalone</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='else'>
+                <div class="page-header">
+                    <h1><small>Everything Else</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Automobile-->
+    <div class='container-fluid' id='automobile'>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <div class='jumbotron'>
+                    <h1>Automobile</h1>
+                    <hr>
+                    <ul class="nav nav-pills">
+                        <li role="presentation"><a href="#sae">SAE</a></li>
+                        <li role="presentation"><a href="#asme">ASME</a></li>
+                        <li role="presentation"><a href="#Amisc">Miscellaneous</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row'>        
+            <div class='col-lg-12' id='sae'>
+                <div class="page-header">
+                    <h1><small>SAE</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='asme'>
+                <div class="page-header">
+                    <h1><small>ASME</small></h1>
+                </div>
+            </div>
+            <div class='col-lg-12' id='Amisc'>
+                <div class="page-header">
+                    <h1><small>Miscellaneous</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

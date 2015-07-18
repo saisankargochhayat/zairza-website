@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title><%- title %></title>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<!--Head same as base index-->
+    <nav class="navbar navbar-inverse" id="navbar1">
+        <div class="container-fluid">
+            <div class=""><h3 id="navblue">Documentation and Project Reports</h3></div>
+            <!-- logo and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#headNavbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="headNavbar">
+                <ul class="nav navbar-nav">
+                   <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Robotics</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Manual</a></li>
+                            <li><a href="#">Electronics</a></li>
+                            <li><a href="#">Avr</a></li>
+                            <li><a href="#">Arduino</a></li>
+                            <li><a href="#">Miscellaneous</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="wh">Software</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Languages</a></li>
+                            <li><a href="#">Standalone Apps</a></li>
+                            <li><a href="#">Everything Else</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="wh">Automobile</span></a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!--Head ends-->
+    <!--bar starts-->
+    <div class="container-fluid" id="topbar" >
+        <div class="row" id="statusBar">
+            <div class="col-md-12 col-lg-10 col-lg-offset-1">
+                <span id="statusText" class="barText">
+                File id: #<%- fileid %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                category: <%- placement %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Views: futureElement
+                </span>
+                <a id="create"><span class="glyphicon glyphicon-plus">&nbsp;Create</span></a>
+            </div>
+        </div>
+    </div>
+    <!--bar Ends-->
+    <!--Main Edit page starts-->
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-lg-offset-2 AR">
+                <!--Editor title-->
+                <div ><%- title %></div>
+                <br />
+                <!--Contributers-->
+                <div ><%- contributers %></div>
+                <br />
+                <!--Main Article-->
+                <div ><%- mainbody %></div>
+            </div>
+            <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'zairza';
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+            </script>
+        </div>
+    </div>
+
+</body>
+</html>
+<!--<textarea class='ckeditor' name='editor1'></textarea>
+	<button id='btn' >Submit</button>-->

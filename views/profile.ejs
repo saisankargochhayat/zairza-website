@@ -1,0 +1,50 @@
+<!doctype HTML>
+<html> 
+<head>
+	<meta charset="utf-8">
+    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/shared/css/bootstrap.min.css">
+</head> 
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="jumbotron">
+				<h3> Welcome   <strong><%=name%></strong></h3>
+				<a href="/logout" class="float-right"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout</a>
+				<% if(!IsActivated) {%>
+					<h5>Please contact an Adminstrator to activate your account.<br>
+						Default pasword is 123456. You should change it to make your account secure.
+					</h5>
+				<% } %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-1">
+				<h4>Details of your Account</h4>
+				<table class="table">
+					<tr>
+						<th>Id:</th>
+						<td><%=id%></td>
+					</tr>
+					<tr>
+						<th>Display Name:</th>
+						<td><%=name%></td>
+					</tr>
+					<tr>
+						<th>Email Id:</th>
+						<td><%=email%></td>
+					</tr>
+					<tr>
+						<th>Active:</th>
+						<td><%=IsActivated%></td>
+					</tr>
+					<tr>
+						<th>Password:</th>
+						<td><a href="/changePassword?id=<%=id%>">change</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>

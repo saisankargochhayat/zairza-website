@@ -1,5 +1,20 @@
 # zairza_new
 
+to install dependencies use npm install
+
+
+
+----------------------------------------
+development phase II
+
+-> Server changed to express4 
+-> key based authentication replaced by 
+   google plus Auth2.0 for better utility
+-> automated page generation towards completion
+
+----------------------------------------
+development phase I
+
 [ fix ]
 -> Allpages in pagesDev
 
