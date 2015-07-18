@@ -42,7 +42,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(logger('dev'));
-app.use(session({ secret: 'keyboard cat', saveUninitialized: true, resave: true}));
+app.use(session({ secret: 'keyboard cat',  saveUninitialized: true, resave: true}));
 //passport setup
 app.use(passport.initialize());
 app.use(passport.session());
