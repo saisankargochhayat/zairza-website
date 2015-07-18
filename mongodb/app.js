@@ -9,8 +9,7 @@ var utils = require('./utils'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
-    session = require('express-session'),
-    MongoStore = require('connect-mongo')(session);
+    session = require('express-session');
 
 
 var mongodb = require('mongodb');
@@ -53,18 +52,6 @@ Object.keys(swigFilters).forEach(function (name) {
   }
 
 
-// for maintaining sessions
-  var connection_string = '127.0.0.1:27017/nodejs';
-// if OPENSHIFT env variables are present, use the available connection info:
-if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-  process.env.OPENSHIFT_APP_NAME;
-}
-
-
   MongoApp.set('views', __dirname + '/views');
   MongoApp.set('view engine', 'html');
   MongoApp.set('view options', {layout: false});
@@ -74,9 +61,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   MongoApp.use(methodOverride());
   MongoApp.use(logger('dev'));
   MongoApp.use(session({ secret: config.site.sessionSecret,
-    key: config.site.cookieKeyName, saveUninitialized: true, resave: true,
-    store: new MongoStore({ url: "mongodb://"+connection_string })
-  }));
+    key: config.site.cookieKeyName, saveUninitialized: true, resave: true}));
   
   //MongoApp.use(express.favicon());
   //MongoApp.use(express.logger('dev'));
@@ -181,11 +166,11 @@ db.open(function(err, db) {
   mainConn = db;
 
   //Check if admin features are on
-  if (config.mongodb.admin === true) {
+  if (config.mongodb.admin) {
     //get admin instance
     db.admin(function(err, a) {
+      if (err) {console.error("admin error:"+err)};
       adminDb = a;
-
       if (config.mongodb.adminUsername.length == 0) {
         console.log('Admin Database connected');
         updateDatabases(adminDb);

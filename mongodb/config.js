@@ -1,15 +1,11 @@
-var mongodb_host = process.env.OPENSHIFT_MONGODB_DB_HOST ||'127.0.0.1'
-var mongodb_port = process.env.OPENSHIFT_MONGODB_DB_PORT || 27017
+var mongodb_host = process.env.OPENSHIFT_MONGODB_DB_HOST ||'127.0.0.1',
+    mongodb_port = process.env.OPENSHIFT_MONGODB_DB_PORT || 27017;
 
-var db_admin = "", 
-    db_pass  = "";
-
-if (process.env.OPENSHIFT_MONGODB_DB_HOST) {
-  db_admin = process.env.OPENSHIFT_MONGODB_DB_USERNAME ; 
-  db_pass  = process.env.OPENSHIFT_MONGODB_DB_PASSWORD ;
-}
+  var dbAdmin = process.env.OPENSHIFT_MONGODB_DB_USERNAME || "", 
+      dbPass  = process.env.OPENSHIFT_MONGODB_DB_PASSWORD || "";
 
 module.exports = {
+  
   mongodb: {
     server: mongodb_host,
     port: mongodb_port,
@@ -31,9 +27,9 @@ module.exports = {
        * Add the the name, the username, and the password of the databases you want to connect to
        * Add as many databases as you want!
       {
-        database: 'users',
-        username: '',
-        password: ''
+        database: 'nodejs',
+        username: dbAdmin,
+        password: dbPass
       }
       */
     ],
@@ -43,8 +39,8 @@ module.exports = {
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
 
     //leave username and password empty if no admin account exists
-    adminUsername: db_admin,
-    adminPassword: db_pass,
+    adminUsername: dbAdmin,
+    adminPassword: dbPass,
     //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
     //blacklist: hide databases listed in the blacklist (empty list for no blacklist)
@@ -63,7 +59,7 @@ module.exports = {
 
   //set ifBasicAuth to true if you want to basicAuth before login mongo-express
   //if admin is false, the basicAuthInfo list below will be ignored
-  useBasicAuth: true,
+  useBasicAuth: false,
 
   basicAuth: {
     username: 'admin',
