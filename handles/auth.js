@@ -21,7 +21,7 @@ module.exports = function(passport) {
 
         clientID: '742599687881-a50o5bnkep1f8u8dh59ot2ohtbgapqp8.apps.googleusercontent.com',
     	clientSecret: 'cf2gvC2etlTjKQ5NzbxoUAbb',
-    	callbackURL: "nodejs-shubham21.rhcloud.com/auth/google/callback"
+    	callbackURL: "http://nodejs-shubham21.rhcloud.com/auth/google/callback"
 
     },
     function(token, refreshToken, profile, done) {
