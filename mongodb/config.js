@@ -5,8 +5,8 @@ var db_admin = "",
     db_pass  = "";
 
 if (process.env.OPENSHIFT_MONGODB_DB_HOST) {
-  db_admin = 'admin' 
-  db_pass  = 'wGCWIdN8GPfu'
+  db_admin = process.env.OPENSHIFT_MONGODB_DB_USERNAME ; 
+  db_pass  = process.env.OPENSHIFT_MONGODB_DB_PASSWORD ;
 }
 
 module.exports = {

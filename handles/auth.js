@@ -2,6 +2,8 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
 	LocalStrategy = require('passport-local').Strategy,
 	User = require('./db_user_model.js');
 
+var callback_domain = "http://127.0.0.1:3000";
+if (process.env.OPENSHIFT_NODEJS_IP) {callback_domain = "http://nodejs-shubham21.rhcloud.com"};
 
 module.exports = function(passport) {
 
@@ -21,7 +23,7 @@ module.exports = function(passport) {
 
         clientID: '742599687881-a50o5bnkep1f8u8dh59ot2ohtbgapqp8.apps.googleusercontent.com',
     	clientSecret: 'cf2gvC2etlTjKQ5NzbxoUAbb',
-    	callbackURL: "http://nodejs-shubham21.rhcloud.com/auth/google/callback"
+    	callbackURL: callback_domain+"/auth/google/callback"
 
     },
     function(token, refreshToken, profile, done) {

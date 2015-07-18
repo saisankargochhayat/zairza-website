@@ -7,8 +7,8 @@ var Account = new Schema({
     token    : String,
     email    : String,
     name     : String,
-  	password : String,
-  	IsActivated : Boolean 
+    password : String,
+    IsActivated : Boolean 
 });
 
 
