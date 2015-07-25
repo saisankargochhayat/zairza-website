@@ -1,0 +1,67 @@
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+        $('.anchorthis').each(function(){
+            var anchor = this.id;
+             $('#sidenav').append(
+                '<li><a href="#'+anchor+'">'+anchor+'</a></li>'
+            )
+        })
+    })
+    </script>
+
+    <!--Head ends-->
+    <!--bar starts-->
+    <div class="container-fluid" id="topbar" >
+        <div class="row" id="statusBar">
+            <div class="col-md-12 col-lg-10 col-lg-offset-1">
+                <span id="statusText" class="barText">
+                File id: {{page.fileid}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                category: {{page.placement}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Views: <span id='noOfViews'>{{viewcount}}</span>
+                </span>
+                 <a href="/editor/" id="create"><span class="glyphicon glyphicon-edit">&nbsp;Edit this file</span></a>
+            </div> 
+        </div>
+    </div>
+    <!--bar Ends-->
+    <!--Main Edit page starts-->
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-lg-offset-2 AR">
+                <!--title-->
+                <div >{{page.title}}</div>
+                <br />
+                <!--tags-->
+                <div>Tags:&nbsp;<span ng-repeat="tag in page.tags">
+                    <a ng-href="/tag/{{tag}}"></a>{{tag}}&nbsp;</span>
+                </div>
+                <br />
+                <!--Contributers-->
+                <div >{{page.contributers}}</div>
+                <br />
+                <!--Main Article-->
+                <div >{{page.mainbody}}</div>
+            </div>
+            <div class="col-md-2" role="complementary">
+                <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
+                    <ul class="nav bs-docs-sidenav" id='sidenav'>
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div> 
+            <div class="col-lg-8 col-md-12 col-lg-offset-2" id="disqus_thread"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'zairza';
+    
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>

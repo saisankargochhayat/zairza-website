@@ -20,29 +20,29 @@ jQuery(document).ready(function ($) {
     $('.dept').click(function(){
         menuSelected = this.id;
         switch(menuSelected){
-            case '1' : menuShortName='Manual' ; menuFullName='Robotics|Manual';
+            case '1' : menuShortName='manual' ; menuFullName='Robotics|Manual';
             break;
-            case '2' : menuShortName='Electronics' ; menuFullName='Robotics|Electronics';
+            case '2' : menuShortName='electronics' ; menuFullName='Robotics|Electronics';
             break;
-            case '3' : menuShortName='Avr' ; menuFullName='Robotics|Avr';
+            case '3' : menuShortName='avr' ; menuFullName='Robotics|Avr';
             break;
-            case '4' : menuShortName='Arduino' ; menuFullName='Robotics|Arduino';
+            case '4' : menuShortName='arduino' ; menuFullName='Robotics|Arduino';
             break;
-            case '5' : menuShortName='M_Robotics' ; menuFullName='Robotics|Miscellaneous';
+            case '5' : menuShortName='misc_robotics' ; menuFullName='Robotics|Miscellaneous';
             break;
-            case '6' : menuShortName='Web' ; menuFullName='Software|Web Development';
+            case '6' : menuShortName='web' ; menuFullName='Software|Web Development';
             break;
-            case '7' : menuShortName='Languages' ; menuFullName='Software|Languages';
+            case '7' : menuShortName='languages' ; menuFullName='Software|Languages';
             break;
-            case '8' : menuShortName='Standalone' ; menuFullName='Software|Standalone Apps';
+            case '8' : menuShortName='standalone' ; menuFullName='Software|Standalone Apps';
             break;
-            case '9' : menuShortName='E_Software' ; menuFullName='Software|Everything Else';
+            case '9' : menuShortName='misc_software' ; menuFullName='Software|Everything Else';
             break;
-            case '10' : menuShortName='SAE' ; menuFullName='Automobile|SAE';
+            case '10' : menuShortName='sae' ; menuFullName='Automobile|SAE';
             break;
-            case '11' : menuShortName='ASME' ; menuFullName='Automobile|ASME';
+            case '11' : menuShortName='asme' ; menuFullName='Automobile|ASME';
             break;
-            case '12' : menuShortName='M_Automobile' ; menuFullName='Automobile|Miscellaneous';
+            case '12' : menuShortName='misc_automobile' ; menuFullName='Automobile|Miscellaneous';
             break;
         }
         setMenu(menuFullName);
@@ -61,7 +61,8 @@ jQuery(document).ready(function ($) {
 
     $('#uploadToServer').click(function () {
         var uploadObj = {
-            fileid: f,
+            update: false,
+            fileid: f.toString(),
             placement: menuFullName,
             savePosition:menuShortName,
             title : $('#Title').html(),
@@ -74,7 +75,7 @@ jQuery(document).ready(function ($) {
         $.post('/inbound/newpage',uploadObj, function (data) {
             alert(data);
         })
-        .success(function(){window.location.replace("/usr/docs/"+f+'.html')})
+        .success(function(){window.location.replace("/display/"+f)})
         .error(function(){console.log('error')})
     })
 });

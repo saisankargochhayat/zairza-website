@@ -1,85 +1,55 @@
+/**
+ * Module dependencies.
+ */
+
 var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
 var _ = require('underscore');
 var async = require('async');
-var utils = require('./utils'),
-    logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    session = require('express-session');
-
+var utils = require('./utils');
 
 var mongodb = require('mongodb');
 var cons = require('consolidate');
 var swig = require('swig');
 var swigFilters = require('./filters');
-var MongoApp = express();
+var app = express();
 
 var config = require('./config');
 
 //Set up swig
-MongoApp.engine('html', cons.swig);
+app.engine('html', cons.swig);
 
 Object.keys(swigFilters).forEach(function (name) {
     swig.setFilter(name, swigFilters[name]);
 });
 
-//basic auth
+//App configuration
+app.configure(function(){
   if(config.useBasicAuth){
-    var basicAuth = require('basic-auth');
-
-    var auth = function (req, res, next) {
-    function unauthorized(res) {
-      res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-      return res.send(401);
-      };
-
-      var user = basicAuth(req);
-
-      if (!user || !user.name || !user.pass) {
-        return unauthorized(res);
-      };
-
-      if (user.name === 'config.basicAuth.username' && user.pass === 'config.basicAuth.password') {
-        return next();
-      } else {
-        return unauthorized(res);
-      };
-    };
+    app.use(express.basicAuth(config.basicAuth.username, config.basicAuth.password));
   }
-
-
-  MongoApp.set('views', __dirname + '/views');
-  MongoApp.set('view engine', 'html');
-  MongoApp.set('view options', {layout: false});
-
-  MongoApp.use(cookieParser(config.site.cookieSecret));
-  MongoApp.use(bodyParser.urlencoded({ extended: false }));
-  MongoApp.use(methodOverride());
-  MongoApp.use(logger('dev'));
-  MongoApp.use(session({ secret: config.site.sessionSecret,
-    key: config.site.cookieKeyName, saveUninitialized: true, resave: true}));
-  
-  //MongoApp.use(express.favicon());
-  //MongoApp.use(express.logger('dev'));
-  MongoApp.use(config.site.baseUrl,express.static(__dirname + '/public'));
-  //MongoApp.use(express.bodyParser());
-  //MongoApp.use(express.cookieParser(config.site.cookieSecret));
-  //MongoApp.use(express.session({
-  //  secret: config.site.sessionSecret,
-  //  key: config.site.cookieKeyName
-  //}));
-  //MongoApp.use(express.methodOverride());
-  //MongoApp.use(MongoApp.router);
-
-/*
-MongoApp.configure('development', function(){
-  MongoApp.use(express.errorHandler());
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'html');
+  app.set('view options', {layout: false});
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(config.site.baseUrl,express.static(__dirname + '/public'));
+  app.use(express.bodyParser());
+  app.use(express.cookieParser(config.site.cookieSecret));
+  app.use(express.session({
+    secret: config.site.sessionSecret,
+    key: config.site.cookieKeyName
+  }));
+  app.use(express.methodOverride());
+  app.use(app.router);
 });
-*/
+
+app.configure('development', function(){
+  app.use(express.errorHandler());
+});
+
 
 //Set up database stuff
 var host = config.mongodb.server || 'localhost';
@@ -166,11 +136,11 @@ db.open(function(err, db) {
   mainConn = db;
 
   //Check if admin features are on
-  if (config.mongodb.admin) {
+  if (config.mongodb.admin === true) {
     //get admin instance
     db.admin(function(err, a) {
-      if (err) {console.error("admin error:"+err)};
       adminDb = a;
+
       if (config.mongodb.adminUsername.length == 0) {
         console.log('Admin Database connected');
         updateDatabases(adminDb);
@@ -223,7 +193,7 @@ db.open(function(err, db) {
 });
 
 //View helper, sets local variables used in templates
-MongoApp.all('*', function(req, res, next) {
+app.all('*', function(req, res, next) {
   res.locals.baseHref = config.site.baseUrl;
   res.locals.databases = databases;
   res.locals.collections = collections;
@@ -244,7 +214,7 @@ MongoApp.all('*', function(req, res, next) {
 
 
 //route param pre-conditions
-MongoApp.param('database', function(req, res, next, id) {
+app.param('database', function(req, res, next, id) {
   //Make sure database exists
   if (!_.include(databases, id)) {
     req.session.error = "Database not found!";
@@ -265,7 +235,7 @@ MongoApp.param('database', function(req, res, next, id) {
 });
 
 //:collection param MUST be preceded by a :database param
-MongoApp.param('collection', function(req, res, next, id) {
+app.param('collection', function(req, res, next, id) {
   //Make sure collection exists
   if (!_.include(collections[req.dbName], id)) {
     req.session.error = "Collection not found!";
@@ -288,7 +258,7 @@ MongoApp.param('collection', function(req, res, next, id) {
 });
 
 //:document param MUST be preceded by a :collection param
-MongoApp.param('document', function(req, res, next, id) {
+app.param('document', function(req, res, next, id) {
   if (id.length == 24) {
     //Convert id string to mongodb object ID
     try {
@@ -324,30 +294,37 @@ var middleware = function(req, res, next) {
 };
 
 //Routes
-MongoApp.get(config.site.baseUrl, middleware,  routes.index);
+app.get(config.site.baseUrl, middleware,  routes.index);
 
-MongoApp.get(config.site.baseUrl+'db/:database/export/:collection', middleware, routes.exportCollection);
+app.get(config.site.baseUrl+'db/:database/export/:collection', middleware, routes.exportCollection);
 
-MongoApp.get(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.viewDocument);
-MongoApp.put(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.updateDocument);
-MongoApp.delete(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.deleteDocument);
-MongoApp.post(config.site.baseUrl+'db/:database/:collection', middleware, routes.addDocument);
+app.get(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.viewDocument);
+app.put(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.updateDocument);
+app.del(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.deleteDocument);
+app.post(config.site.baseUrl+'db/:database/:collection', middleware, routes.addDocument);
 
-MongoApp.get(config.site.baseUrl+'db/:database/:collection', middleware, routes.viewCollection);
-MongoApp.put(config.site.baseUrl+'db/:database/:collection', middleware, routes.renameCollection);
-MongoApp.delete(config.site.baseUrl+'db/:database/:collection', middleware, routes.deleteCollection);
-MongoApp.post(config.site.baseUrl+'db/:database', middleware, routes.addCollection);
+app.get(config.site.baseUrl+'db/:database/:collection', middleware, routes.viewCollection);
+app.put(config.site.baseUrl+'db/:database/:collection', middleware, routes.renameCollection);
+app.del(config.site.baseUrl+'db/:database/:collection', middleware, routes.deleteCollection);
+app.post(config.site.baseUrl+'db/:database', middleware, routes.addCollection);
 
-MongoApp.get(config.site.baseUrl+'db/:database', middleware, routes.viewDatabase);
+app.get(config.site.baseUrl+'db/:database', middleware, routes.viewDatabase);
 
-//run as standalone MongoApp?
+//place at last point 
+// Handle 404
+app.use(function(req, res){
+  res.status(404);
+  res.render('404',{});
+})
+
+//run as standalone App?
 if (require.main === module){
-  MongoApp.listen(config.site.port);
+  app.listen(config.site.port);
   console.log("Mongo Express server listening on port " + (config.site.port || 80));
 }else{
   //as a module
   console.log('Mongo Express module ready to use on route "'+config.site.baseUrl+'*"');
-  server=http.createServer(MongoApp);
+  server=http.createServer(app);
   module.exports=function(req,res,next){
     server.emit('request', req, res);
   };

@@ -73,8 +73,8 @@ app.get('/auth/google/callback',
   });
 
 app.post('/localauth', passport.authenticate('login', {
-  successRedirect : '/',
-  failureRedirect : '/failed',
+  successRedirect : '/profile',
+  failureRedirect : '/login',
 }));
 
 app.get('/logout', function(req, res){
@@ -105,6 +105,7 @@ app.get('/admin/upload/',ensureAuthenticated,ensureActive,function(req,res){
 })
 
 app.get('/profile',ensureAuthenticated,function(req,res){
+  console.log(req);
   res.render('profile', req.user)
 })
 
@@ -119,14 +120,7 @@ app.post('/inbound/update', require('./handles/updateJSON.js'));
 app.post('/inbound/newfile', require('./handles/newfile.js'));
 app.post('/inbound/modify', require('./handles/modifyJSON.js'));
 
-app.use("/", ensureAdmin, require("./mongodb/app.js"));
-//place at last point 
-// Handle 404
-app.use(function(req, res) {
-    res.status(404);
-    res.render('404',{});
-  });
-  
+app.use("/", ensureAdmin, require("./mongodb/app.js"));  
 // Handle 500
 //app.use(function(error, req, res, next) {
      //res.status(500).send('500: Internal Server Error');
