@@ -13,7 +13,7 @@ var page = new Schema({
 });
 
 page.methods.removeFormatting = function (str) {
-    return str.split(/<\/*w*>/).join("");
+    return str.split(/<\/*\w*>/).join('');
 }
 
 var Page = mongoose.model('tutorial_pages', page);
@@ -26,34 +26,38 @@ exports.savePage = function (request, response){
 
     var newPage = new Page();
     try{
-        newPage.fileid: dObj.fileid,
-        newPage.placement: dObj.placement,
-        newPage.savePosition: dObj.savePosition,
-        newPage.title : dObj.title,
-        newPage.head_title : newPage.removeFormatting(dObj.title),
-        newPage.contributers : dObj.contributers,
-        newPage.mainbody : dObj.mainbody,
-        newPage.tagfield : dObj.tagfield.split(",")
+        newPage.fileid = dObj.fileid;
+        newPage.placement = dObj.placement;
+        newPage.savePosition = dObj.savePosition;
+        newPage.title = dObj.title;
+        newPage.head_title = newPage.removeFormatting(dObj.title);
+        newPage.contributers = dObj.contributers;
+        newPage.mainbody = dObj.mainbody;
+        newPage.tagfield = dObj.tagfield.split(",");
+        console.log(newPage);
     }
     catch(err){console.error("Error:generate newPage \n"+err)}
 
+    newPage.save(function(err) {
+        if (err){
+          console.error("Error:create newPage\n"+err) 
+          response.status(500).send("Create Page Error");
+        }else response.send("success");
+    });
+
+    /*
     if (dObj.update) {        
         //try saving this new page
         Page.update({fileid:newPage.fileid},newPage,function(err) {
         if (err){ 
-            console.error("Error:Update newUser\n"+err)
+            console.error("Error:Update newPage\n"+err)
             response.status(500).send("Page Update Error");
         }else response.send("success");
         })
-    } else{
+    } else{*/
         //try saving this new page
-        newPage.save(function(err) {
-        if (err){
-          console.error("Error:create newUser\n"+err) 
-          response.status(500).send("Create Page Error");
-        }else response.send("success");
-        });
-    };
+        
+   // };
      
 }
 
@@ -67,7 +71,7 @@ exports.getPageById = function(request, response){
     })
 } 
 
-exports.findTagByTagName = function(request,response){
+exports.findPageByTagName = function(request,response){
     var tagname = request.query.tagname;
     Page.find({tagfield: {$in:[tagname]}},function(err, pageArray){
         if (err){
@@ -80,8 +84,6 @@ exports.findTagByTagName = function(request,response){
 //returns an object containg all entries segregated by type
 exports.getJournal = function(request, response){
     var type = request.query.typename;
-    var ret = {};
-
     Page.find({savePosition:type},function(err, data){
         if (err){
           console.error("Error:getJournal\n"+err) 
@@ -102,7 +104,7 @@ var view_counter = mongoose.model("view_counter", _view_counter);
 exports.getViews = function(request, response){
     var id = request.query.pageid ;
     view_counter.findOne({pageid:id},function(err, data){
-        if (err) {console.error("Error:get views")
+        if (err) {console.error("Error:get views\n"+err)
             response.status(500).send("data read error")
         }
         else{
@@ -112,12 +114,12 @@ exports.getViews = function(request, response){
                 data.pageid = id;
                 data.views = 0;
             };
-            data.views.$inc();
+            data.views += 1;
             data.save(function(err){
                 if (err) {
-                    console.error("Error:saving views")
+                    console.error("Error:saving views\n"+err)
                 }else{
-                    response.send(data.views);
+                    response.send(data.views.toString());
                 };
             });
         }        

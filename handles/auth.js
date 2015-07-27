@@ -51,6 +51,7 @@ module.exports = function(passport) {
                     newUser.name  = profile.displayName;
                     newUser.email = profile.emails[0].value; // pull the first email
                     newUser.IsActivated = false ; //let admins decide who to allow
+                    newUser.IsAdmin = false ;
                     newUser.password = newUser.generateHash('123456') 
                 	}
                 	catch(err){console.error(err);

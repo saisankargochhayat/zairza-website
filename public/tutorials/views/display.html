@@ -19,7 +19,7 @@
                 category: {{page.placement}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 Views: <span id='noOfViews'>{{viewcount}}</span>
                 </span>
-                 <a href="/editor/" id="create"><span class="glyphicon glyphicon-edit">&nbsp;Edit this file</span></a>
+                 <a ng-href="/tutorials/#/editor/{{page.fileid}}" id="create"><span class="glyphicon glyphicon-edit">&nbsp;Edit</span></a>
             </div> 
         </div>
     </div>
@@ -29,18 +29,18 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-lg-offset-2 AR">
                 <!--title-->
-                <div >{{page.title}}</div>
+                <div ng-bind-html=page.title></div>
                 <br />
                 <!--tags-->
-                <div>Tags:&nbsp;<span ng-repeat="tag in page.tags">
-                    <a ng-href="/tag/{{tag}}"></a>{{tag}}&nbsp;</span>
+                <div>Tags:&nbsp;<span ng-repeat="tag in page.tagfield">
+                    <a ng-href="/tutorials/#/tag/{{tag}}">{{tag}}</a>&nbsp;</span>
                 </div>
                 <br />
                 <!--Contributers-->
-                <div >{{page.contributers}}</div>
+                <div ng-bind-html=page.contributers></div>
                 <br />
                 <!--Main Article-->
-                <div >{{page.mainbody}}</div>
+                <div ng-bind-html=page.mainbody></div>
             </div>
             <div class="col-md-2" role="complementary">
                 <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">

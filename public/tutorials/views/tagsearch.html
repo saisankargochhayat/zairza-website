@@ -5,7 +5,10 @@
                 <!--Editor title-->
             <div ><h3>Search results for {{tag}}</h3></div>
             <br />
-            <div ng-repeat=""></div>
+            <div ng-repeat="page in pageMatch">
+            	<a ng-href="/tutorials/#/display/{{page.fileid}}"><h4>{{page.title|htmlToPlaintext}}</h4>
+            	<h5>by <cite>{{page.contributers|htmlToPlaintext}}</cite></h5></a>
+            </div>
         </div> 
     </div>
 </div>

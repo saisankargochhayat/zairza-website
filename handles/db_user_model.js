@@ -8,7 +8,8 @@ var Account = new Schema({
     email    : String,
     name     : String,
     password : String,
-    IsActivated : Boolean 
+    IsActivated : Boolean, 
+    IsAdmin : Boolean 
 });
 
 

@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
     $('#Filetarget').append('/usr/docs/'+f+'.html');
     //dropdown menu selector
     var menuSelected='1',
-        menuShortName = 'Manual',
+        menuShortName = 'manual',
         menuFullName = 'Robotics|Manual';
     var setMenu = function(mfullname){
         $('#selectedTarget').empty();
@@ -72,7 +72,7 @@ jQuery(document).ready(function ($) {
         }
         var upstr = JSON.stringify(uploadObj);
         console.log(upstr);
-        $.post('/inbound/newpage',uploadObj, function (data) {
+        $.post('/tutorial/newpage',uploadObj, function (data) {
             alert(data);
         })
         .success(function(){window.location.replace("/display/"+f)})

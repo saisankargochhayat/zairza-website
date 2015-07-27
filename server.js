@@ -105,13 +105,17 @@ app.get('/admin/upload/',ensureAuthenticated,ensureActive,function(req,res){
 })
 
 app.get('/profile',ensureAuthenticated,function(req,res){
-  console.log(req);
   res.render('profile', req.user)
 })
 
-app.get('/getTagByFileId',require('./handles/tags.js').getBFID);
-app.get('/getTagByName',require('./handles/tags.js').getBTN);
-
+app.get('/tutorial/getJournal',require('./handles/tutorial.js').getJournal);
+app.get('/tutorial/getPageById',require('./handles/tutorial.js').getPageById);
+app.get('/tutorial/getViews',require('./handles/tutorial.js').getViews);
+app.get('/tutorial/findPageByTagName',require('./handles/tutorial.js').findPageByTagName);
+app.post('/tutorial/newpage',require('./handles/tutorial.js').savePage);
+app.get('/tutorial/getUser', ensureAuthenticated, function(req, res){
+  res.send(JSON.stringify(req.user));
+})
 //=========== Express File Handle routes ===========//
 app.post('/inbound/newImage',function(req,res){
   res.send('Not Supported, use url')});
@@ -119,12 +123,13 @@ app.post('/inbound/newpage', require('./handles/newpage.js'));
 app.post('/inbound/update', require('./handles/updateJSON.js'));
 app.post('/inbound/newfile', require('./handles/newfile.js'));
 app.post('/inbound/modify', require('./handles/modifyJSON.js'));
-
+app.post('/changePassword',ensureAuthenticated, require('./handles/db_routines.js').changePass);
 app.use("/", ensureAdmin, require("./mongodb/app.js"));  
-// Handle 500
-//app.use(function(error, req, res, next) {
-     //res.status(500).send('500: Internal Server Error');
-//});
+
+//Handle 500
+app.use(function(error, req, res, next) {
+res.status(500).send('500: Internal Server Error');
+});
 
 
 var server = app.listen(server_port,server_ip_address, function () {

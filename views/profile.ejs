@@ -5,9 +5,11 @@
     <title>Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/shared/css/bootstrap.min.css">
+	<script type="text/javascript" src="/shared/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/shared/js/bootstrap.min.js"></script>
 </head> 
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="jumbotron">
 				<h3> Welcome   <strong><%=name%></strong></h3>
@@ -40,11 +42,54 @@
 						<td><%=IsActivated%></td>
 					</tr>
 					<tr>
+						<th>Admin Access:</th>
+						<td><%=IsAdmin%></td>
+					</tr>
+					<tr>
 						<th>Password:</th>
-						<td><a href="/changePassword?id=<%=id%>">change</a></td>
+						<td><a data-toggle="modal" data-target="#passchange">change</a></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="passchange" tabindex="-1" role="dialog" aria-labelledby="passchangeLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="passchangeLabel">Change Password</h4>
+      </div>
+      <div class="modal-body">
+        <input type="password" class="form-control" name="pass" id="pass" placeholder="Enter new password"><br>
+        <input type="password" class="form-control" name="cfm" id="cfm" placeholder="Reenter to confirm"><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="save_new_pass">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("#save_new_pass").click(function(){
+		var pass = $("#pass").val(),
+			cfmPass = $("#cfm").val();
+		if (pass != cfmPass) alert("Check Password")
+		else {
+			$.post("/changePassword",{password:pass},function(data){
+				alert(data);
+			})
+			 .error(function(error){
+			 	alert(error);
+			})
+		}
+	})
+})
+</script>
 </body>
+

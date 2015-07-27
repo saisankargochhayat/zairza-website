@@ -129,9 +129,10 @@
                     <h1><small>Manual</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('manual')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='avr'>
@@ -139,9 +140,10 @@
                     <h1><small>Avr</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('avr')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='arduino'>
@@ -149,9 +151,10 @@
                     <h1><small>Arduino</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('arduino')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='elec'>
@@ -159,9 +162,10 @@
                     <h1><small>Electronics</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('elec')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='misc'>
@@ -169,9 +173,10 @@
                     <h1><small>Miscellaneous</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('misc_robotics')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
         </div>
@@ -202,9 +207,10 @@
                     <h1><small>Web Development</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('web')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='lang'>
@@ -212,9 +218,10 @@
                     <h1><small>Languages</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('lang')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='standalone'>
@@ -222,9 +229,10 @@
                     <h1><small>Standalone</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('standalone')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='else'>
@@ -232,9 +240,10 @@
                     <h1><small>Everything Else</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('misc_software')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
         </div>
@@ -264,9 +273,10 @@
                     <h1><small>SAE</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('sae')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='asme'>
@@ -274,9 +284,10 @@
                     <h1><small>ASME</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('asme')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
             <div class='col-lg-12' id='Amisc'>
@@ -284,9 +295,10 @@
                     <h1><small>Miscellaneous</small></h1>
                 </div>
                 <div ng-repeat="item in getJournal('misc_automobile')">
-                    <a ng-href="/display/{{item.fileid}}">
-                        <h4>{{item.title}}</h4>
-                        <cite class="cite">``by {{item.contributers}}``</cite></a>
+                    <a ng-href="/tutorials/#/display/{{item.fileid}}">
+                        <h4>{{item.title|htmlToPlaintext}}
+                        <cite class="cite">by {{item.contributers|htmlToPlaintext}}</cite></h4>
+                    </a>
                 </div>
             </div>
         </div>
