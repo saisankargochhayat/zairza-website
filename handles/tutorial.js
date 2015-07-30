@@ -1,7 +1,10 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    fs = require('fs');
 
-var page = new Schema({
+
+
+var _page = new Schema({
     fileid: String,
     placement: String,
     savePosition: String,
@@ -12,53 +15,57 @@ var page = new Schema({
     tagfield : Array
 });
 
-page.methods.removeFormatting = function (str) {
+_page.methods.removeFormatting = function (str) {
     return str.split(/<\/*\w*>/).join('');
 }
+_page.methods.fill_new_content = function(newObject, replacement_object){    
+    try{
+        newObject.__creater_id = replacement_object.__creater_id;
+        newObject.fileid = replacement_object.fileid;
+        newObject.placement = replacement_object.placement;
+        newObject.savePosition = replacement_object.savePosition;
+        newObject.title = replacement_object.title;
+        newObject.head_title = newObject.removeFormatting(replacement_object.title);
+        newObject.contributers = replacement_object.contributers;
+        newObject.mainbody = replacement_object.mainbody;
+        newObject.tagfield = replacement_object.tagfield.split(",");
+    }
+    catch(err){console.error("Error: Create newObject \n"+err)}
+}
 
-var Page = mongoose.model('tutorial_pages', page);
+//* ==== Main ====*//
+var Page = mongoose.model('tutorial_pages', _page);
 
 exports.savePage = function (request, response){
 
-    //dObj: recieved object from post command on the page
-    //format should be {title, contributers, mainbody, tagfield, fileid, placement, savePosition}
-    dObj = request.body;
+    page_content = request.body;
 
-    var newPage = new Page();
-    try{
-        newPage.fileid = dObj.fileid;
-        newPage.placement = dObj.placement;
-        newPage.savePosition = dObj.savePosition;
-        newPage.title = dObj.title;
-        newPage.head_title = newPage.removeFormatting(dObj.title);
-        newPage.contributers = dObj.contributers;
-        newPage.mainbody = dObj.mainbody;
-        newPage.tagfield = dObj.tagfield.split(",");
-        console.log(newPage);
-    }
-    catch(err){console.error("Error:generate newPage \n"+err)}
+    if (page_content.type == "new") {
+        var newPage = new Page();
 
-    newPage.save(function(err) {
-        if (err){
-          console.error("Error:create newPage\n"+err) 
-          response.status(500).send("Create Page Error");
-        }else response.send("success");
-    });
-
-    /*
-    if (dObj.update) {        
-        //try saving this new page
-        Page.update({fileid:newPage.fileid},newPage,function(err) {
-        if (err){ 
-            console.error("Error:Update newPage\n"+err)
-            response.status(500).send("Page Update Error");
-        }else response.send("success");
-        })
-    } else{*/
-        //try saving this new page
+        newPage.fill_new_content(newPage, page_content);
         
-   // };
-     
+        newPage.save(function(err) {
+            if (err){
+            console.error("Error:create new Page\n"+err) 
+            response.status(500).send("Create Page Error");
+            }else response.send("success");
+        });    
+    }else if (page_content.type == "edit") {
+        Page.findOne({fileid:page_content.fileid},function(err, page){
+            if (err) {console.error("Error: Page find\n"+err)};
+            if (!page) {console.error("Error: Page find --> No results found")};
+            page.fill_new_content(page, page_content);
+            page.save(function(err) {
+                if (err){
+                console.error("Error:Save Modified Page\n"+err) 
+                response.status(500).send("Save Modified Error");
+                }else response.send("success");
+            });    
+        })
+    }else{
+        response.send("Unknown request Type Field");
+    }     
 }
 
 exports.getPageById = function(request, response){
@@ -125,3 +132,30 @@ exports.getViews = function(request, response){
         }        
     })
 }
+
+/*Tutorial image upload*/
+
+exports.getImageForm = function(req, res){
+  res.send('<form method="post" enctype="multipart/form-data">'
+    + '<p>Image: <input type="file" name="image" /></p>'
+    + '<p><input type="submit" value="Upload" /></p>'
+    + '</form>');
+}
+exports.getPostImageData = function(req, res){
+  if(req.query.CKEditor == 'mainBody'){
+    var CKEditorFuncNum = req.query.CKEditorFuncNum;  
+    var tmp_path = req.file.path;
+    var now = Date.now();
+    //date atribute to make each upload unique
+    var target_path = 'public/tutorials/images/uploaded/' + now + req.file.originalname ;
+    var src = fs.createReadStream(tmp_path);
+    var dest = fs.createWriteStream(target_path);
+    var url = "./images/uploaded/" + now + req.file.originalname ;
+    src.pipe(dest);
+    src.on('end', function() { res.send("<script>window.parent.CKEDITOR.tools.callFunction("
+        + CKEditorFuncNum +", \"" + url + "\");</script>")});
+    src.on('error', function(err) { res.send('Error, try again'); });
+    }else{
+        res.send("this feature is supported only on Main body")
+    }
+ }

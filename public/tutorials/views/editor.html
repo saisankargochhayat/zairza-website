@@ -39,13 +39,6 @@
                 <span class="glyphicon glyphicon-remove frclose"></span>
             </div>
         </div>
-        <div class="row" id="hackBar">
-            <div class="col-md-12 col-lg-10 col-lg-offset-1">
-                <span id="hackText" class="barText">
-                [Hack] If you have any code to insert please use Github's <a href="http://gist.github.com">GIST</a> using <a href="/usr/docs/1436021505378.html" target='_blank'>this hack!</a></span>
-                <span class="glyphicon glyphicon-remove frclose"></span>
-            </div>
-        </div>
         <div class="row" id="suggestionBar">
             <div class="col-md-12 col-lg-10 col-lg-offset-1">
                 <span id="suggestionText" class="barText">[suggestion] To mark a section important, use DIV with class 'anchorthis' and id(single word only) describing it , they will be used in view as side navigation</span>
@@ -59,20 +52,19 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 col-lg-offset-2 AR">
                 <!--Editor title-->
-                <div class="edit" id="Title" contenteditable="true"><h3>Title</h3>{click to edit}</div>
+                <div class="edit" id="Title" ><h3>Title</h3></div>
                 <br />
                 <!-- Tags -->
                 <textarea class="edit" id="Tags" contenteditable="true" placeholder='Tags, separated by comma [no spaces allowed]'></textarea>
                 <br />
                 <!--Contributers-->
-                <div class="edit" id="Contrib" contenteditable="true"><h5><em>Contributors</em></h5>{click to edit}</div>
+                <div class="edit" id="Contrib"><h4><em>contributers<em></h4></div>
                 <br />
                 <!--Main Article-->
-                <div class="edit"  id="mainBody" contenteditable="true"><h4>Your main  Article goes here.</h4></div>
+                <div class="edit"  id="mainBody"><p>This is main body of your article</p></div>
             </div>
         </div>
     </div>
 
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/adapters/jquery.js"></script>
-    <script src="js/editor_script.js"></script>

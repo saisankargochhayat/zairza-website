@@ -90,7 +90,7 @@
 	</td>
     <td><h3><a href="db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
     <td class="span2">
-      <form method="POST" id="db-{{ dbName }}-{{ c }}" action="db/{{ dbName }}/{{ c }}" style="margin: 0px;">
+      <form method="POST" id="db-{{ dbName }}-{{ c }}" action="db/{{ dbName }}/{{ c }}?_method=DELETE" style="margin: 0px;">
         <input type="hidden" name="_method" value="delete">
         <button type="submit" class="hidden"></button>
       </form>

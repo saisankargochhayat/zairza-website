@@ -55,7 +55,7 @@ Object.keys(swigFilters).forEach(function (name) {
     saveUninitialized: true, resave: true
   }));
 //  app.use(express.methodOverride());
-  app.use(methodOverride());
+  app.use(methodOverride('_method'));
   app.use(express.Router());
 
 

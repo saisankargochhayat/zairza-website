@@ -1,3 +1,5 @@
+var global_settings = {type:null} ;
+
 var app = angular.module("ngApp",["ngRoute"]);
 
 app.config(["$routeProvider",function ($routeProvider) {
@@ -12,6 +14,10 @@ app.config(["$routeProvider",function ($routeProvider) {
   })
   .when("/editor/:id",{
     controller : "editor",
+    templateUrl: "./views/editor.html"
+  })
+  .when("/newpage",{
+    controller : "newpage",
     templateUrl: "./views/editor.html"
   })
   .when("/tag/:tagname",{
@@ -90,41 +96,54 @@ app.controller("tag",['$scope','$http','$routeParams',
 app.controller("editor",['$scope','$http','$routeParams',
   function($scope, $http, $routeParams){
     //verify if access available
-    $scope.user = {name:"login first"};
+    $scope.user = {};
     $http.get("/tutorial/getUser")
       .success(function(data){
         if (data.hasOwnProperty("name")) {
-          $scope.user = data;  
-        };        
+          $scope.user = data;
+          global_settings.user = data;  
+
+          //retrive page
+          var fileid = $routeParams.id;
+          $http.get("/tutorial/getPageById?id="+fileid)
+          .success(function(data){
+            //update data on window
+            global_settings.type = "edit";
+            config_editor_view(data);
+          })
+          .error(function(err){
+            console.log(err);
+          })
+        }else{
+          alert("You need to login to perform this task")
+          window.location.replace("/login");
+        }        
       })
       .error(function(err){
         console.log(err);
       })
+  }])
+
+app.controller("newpage",['$scope','$http','$routeParams',
+  function($scope, $http, $routeParams){
+    //verify if access available
+    $scope.user = {};
     $http.get("/tutorial/getUser")
       .success(function(data){
         if (data.hasOwnProperty("name")) {
-          $scope.user = data;  
-        };        
+          $scope.user = data;
+          //update window
+          global_settings.user = data;  
+          global_settings.type = "new";
+          config_editor_view();
+        }else{
+          alert("You need to login to perform this task")
+          window.location.replace("/login");
+        }        
       })
       .error(function(err){
         console.log(err);
       })
-
-      //retrive page
-    var fileid = $routeParams.id;
-     var page = {};
-    $http.get("/tutorial/getPageById?id="+fileid)
-      .success(function(data){
-        page = data;
-        angular.element('#Title').html(page.title);
-        angular.element('#Contrib').html(page.contributers);
-        angular.element('#mainBody').html(page.mainbody);
-        angular.element('#Tags').html(page.tagfield);
-      })
-      .error(function(err){
-        console.log(err);
-      })
-
   }])
 
 app.filter('htmlToPlaintext', function() {
@@ -132,3 +151,111 @@ app.filter('htmlToPlaintext', function() {
       return String(text).replace(/<[^>]+>/gm,'');
     };
   })
+
+
+var config_editor_view = function(page){
+  // JavaScript source code
+jQuery(document).ready(function ($) {
+    CKEDITOR.config.disableNativeSpellChecker = false;
+    CKEDITOR.config.removeButtons = 'Source';
+    CKEDITOR.config.filebrowserUploadUrl= '/tutorial/imageUpload';
+    CKEDITOR.config.extraPlugins = 'mediaembed';
+
+    $( "#Title, #Contrib, #mainBody" ).click(function(){
+      $(this).prop( "contenteditable", true );
+      $(this).ckeditor();
+    })
+    //BUG: file no. generation based on time may lead to race condition
+    var f = new Date().getTime().toString();
+    var creater_id = global_settings.user.id;
+    //dropdown menu selector
+    var menuSelected='1',
+        menuShortName = 'manual',
+        menuFullName = 'Robotics|Manual';
+
+    // If edit then ...
+    //while(! global_settings.hasOwnProperty("edit"));
+
+    if (global_settings.type === "edit") {
+        f = page.fileid ;
+        creater_id = page.__creater_id; 
+        menuShortName = page.savePosition;
+        menuFullName = page.placement;
+        $('#Title').html(page.title);
+        $('#Contrib').html(page.contributers);
+        $('#mainBody').html(page.mainbody);
+        $('#Tags').val(page.tagfield.join(","))
+    }
+
+    $('#fileId').append(f);
+    var setMenu = function(mfullname){
+        $('#selectedTarget').empty();
+        $('#selectedTarget').append(mfullname);
+    }                        
+    setMenu(menuFullName);
+    $('.dept').click(function(){
+        menuSelected = this.id;
+        switch(menuSelected){
+            case '1' : menuShortName='manual' ; menuFullName='Robotics|Manual';
+            break;
+            case '2' : menuShortName='electronics' ; menuFullName='Robotics|Electronics';
+            break;
+            case '3' : menuShortName='avr' ; menuFullName='Robotics|Avr';
+            break;
+            case '4' : menuShortName='arduino' ; menuFullName='Robotics|Arduino';
+            break;
+            case '5' : menuShortName='misc_robotics' ; menuFullName='Robotics|Miscellaneous';
+            break;
+            case '6' : menuShortName='web' ; menuFullName='Software|Web Development';
+            break;
+            case '7' : menuShortName='languages' ; menuFullName='Software|Languages';
+            break;
+            case '8' : menuShortName='standalone' ; menuFullName='Software|Standalone Apps';
+            break;
+            case '9' : menuShortName='misc_software' ; menuFullName='Software|Everything Else';
+            break;
+            case '10' : menuShortName='sae' ; menuFullName='Automobile|SAE';
+            break;
+            case '11' : menuShortName='asme' ; menuFullName='Automobile|ASME';
+            break;
+            case '12' : menuShortName='misc_automobile' ; menuFullName='Automobile|Miscellaneous';
+            break;
+        }
+        setMenu(menuFullName);
+    })
+    /*fading out warning, status bar other stuffs*/
+    $('.frclose').click(function () {
+        var par = $(this).parent();
+        var gpar = $(par[0]).parent();
+        $(gpar[0]).fadeOut();
+    });
+
+    var processGist = function(htmlString){
+        return htmlString.split(/<p>\s*&lt;\s*gist\s*id=\\/).join('<gist id=')
+                .split(/\\\"&gt;&lt;\/gist&gt;<br><\/p>/).join('"></gist>')
+                .split('<p>&lt;iframe').join('<iframe')
+                .split('&gt;&lt;/iframe&gt;<br></p>').join('></iframe>');
+    }
+
+    $('#uploadToServer').click(function () {
+        var uploadObj = {
+            type:global_settings.type,
+            __creater_id : creater_id,
+            fileid: f,
+            placement: menuFullName,
+            savePosition:menuShortName,
+            title : $('#Title').html(),
+            contributers : $('#Contrib').html(),
+            mainbody : processGist($('#mainBody').html()),
+            tagfield : $('#Tags').val()
+        }
+        var upstr = JSON.stringify(uploadObj);
+        console.log(upstr);
+        $.post('/tutorial/newpage',uploadObj, function (data) {
+            alert(data);
+        })
+        .success(function(){window.location.replace("/tutorials/#/display/"+f)})
+        .error(function(){console.log('error')})
+    })
+});
+} 

@@ -13,8 +13,10 @@ var express = require('express'),
     methodOverride = require('method-override'),
     session = require('express-session'),
     mongoose = require('mongoose'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    multer  = require('multer');
 
+/*ENV settings*/
 var connection_string = '127.0.0.1:27017/nodejs';
 // if OPENSHIFT env variables are present, use the available connection info:
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
@@ -51,6 +53,7 @@ app.use(express.static(__dirname + '/public'));
 
 //import auth variables
 require('./handles/auth.js')(passport);
+
 
 //=========== EJS routes ===========//
 
@@ -108,6 +111,7 @@ app.get('/profile',ensureAuthenticated,function(req,res){
   res.render('profile', req.user)
 })
 
+/* ==== Tutorial Routes ====*/
 app.get('/tutorial/getJournal',require('./handles/tutorial.js').getJournal);
 app.get('/tutorial/getPageById',require('./handles/tutorial.js').getPageById);
 app.get('/tutorial/getViews',require('./handles/tutorial.js').getViews);
@@ -116,6 +120,11 @@ app.post('/tutorial/newpage',require('./handles/tutorial.js').savePage);
 app.get('/tutorial/getUser', ensureAuthenticated, function(req, res){
   res.send(JSON.stringify(req.user));
 })
+app.get('/tutorial/imageUpload',require('./handles/tutorial.js').getImageForm);
+app.post('/tutorial/imageUpload',
+  multer({dest:'public/usr/temp/'}).single('upload'),
+  require('./handles/tutorial.js').getPostImageData);
+
 //=========== Express File Handle routes ===========//
 app.post('/inbound/newImage',function(req,res){
   res.send('Not Supported, use url')});
