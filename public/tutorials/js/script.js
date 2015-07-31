@@ -160,6 +160,7 @@ jQuery(document).ready(function ($) {
     CKEDITOR.config.removeButtons = 'Source';
     CKEDITOR.config.filebrowserUploadUrl= '/tutorial/imageUpload';
     CKEDITOR.config.extraPlugins = 'mediaembed';
+});
 
     $( "#Title, #Contrib, #mainBody" ).click(function(){
       $(this).prop( "contenteditable", true );
@@ -176,7 +177,7 @@ jQuery(document).ready(function ($) {
     // If edit then ...
     //while(! global_settings.hasOwnProperty("edit"));
 
-    if (global_settings.type === "edit") {
+    if (edit_mode) {
         f = page.fileid ;
         creater_id = page.__creater_id; 
         menuShortName = page.savePosition;
@@ -257,5 +258,4 @@ jQuery(document).ready(function ($) {
         .success(function(){window.location.replace("/tutorials/#/display/"+f)})
         .error(function(){console.log('error')})
     })
-});
 } 

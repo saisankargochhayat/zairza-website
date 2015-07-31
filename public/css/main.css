@@ -2,10 +2,17 @@ body{
 	background-color: #d5ffff;
 }
 .head{
-	background-color: #feabb8;
+  position: relative;
 	padding: 10px;
-	box-shadow: 4px 3px 5px 0px rgba(46,33,35,1);
 }
+
+canvas{
+  overflow:hidden;
+  background:#111;
+  position: fixed;
+  height: 100%;
+}
+
 #logo{
 	margin: 5px;
 	margin-right: 15px;
@@ -31,7 +38,6 @@ body{
 	  display: inline;
 }
 .menu{
-	background-color: #fd3755;
 	font-family: sans-serif;
 	box-shadow: 4px 3px 5px 0px rgba(46,33,35,1);
 }
@@ -108,6 +114,17 @@ html,body{overflow-x:hidden;}
   margin-top: 25px;
 }
 
+.whiteText{
+  color: fff;
+}
+a.whiteText:hover{
+  color: 0;
+}
+
+footer{
+  position: relative;
+}
+
 /*support for collection used in Announcement*/
 .collection {
   list-style: none;
@@ -115,7 +132,8 @@ html,body{overflow-x:hidden;}
   border: 1px solid #e0e0e0;
   border-radius: 2px;
   overflow: hidden;
-  position: relative; }
+  position: relative; 
+  padding-left: 0;}
   .collection .collection-item {
     background-color: #fff;
     line-height: 1.5rem;
@@ -177,3 +195,5 @@ html,body{overflow-x:hidden;}
   color: #26a69a; }	
 
   /*end of collection*/
+
+

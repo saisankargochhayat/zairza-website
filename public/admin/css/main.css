@@ -1,0 +1,35 @@
+nav.navbar.navbar-default#topNavbar{
+  border-radius: 0;
+  background-color: #E91E63;
+  padding-bottom: 35px; 
+}
+
+nav.navbar.navbar-default#topNavbar  a.navbar-brand{
+  color: #fff;
+}
+		
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+  background-color: #3f51b5
+}
+
+div.col-lg-2#mainSideBar,div.col-lg-2#mainSideBar .dropdown-menu{
+  left: 10px;
+  border-radius: 2px;
+  background-color: #3f51b5
+}
+
+div.col-lg-2#mainSideBar a,li,a.dropdown-toggle{
+  color: #fff;
+  text-decoration: none;
+}
+
+div.col-lg-2#mainSideBar li :hover{
+  background-color: #1f2758;
+}
+
+#form_window{
+  margin: 0 1% 0% 1%;
+  border: 1px solid black;
+  padding: 2% 15% 2% 15% ;
+
+}
