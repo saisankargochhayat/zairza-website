@@ -122,8 +122,8 @@ app.post('/data/delete',routes.deleteData);
 app.post('/changePassword',ensureAuthenticated, routes.changePass);
 
 //wiki through proxy
-app.get("/wiki/*",function(req, res){
-wikiProxy.web(req, res, { target: 'http://mediawiki-shubham21.rhcloud.com/:80' });
+app.all("/wiki/*",function(req, res){
+wikiProxy.web(req, res, {target:'http://mediawiki-shubham21.rhcloud.com/'});
 })
 
 //mongodb through middleware
