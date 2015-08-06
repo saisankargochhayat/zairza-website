@@ -14,7 +14,10 @@ var express = require('express'),
     session = require('express-session'),
     mongoose = require('mongoose'),
     LocalStrategy = require('passport-local').Strategy,
-    multer  = require('multer');
+    multer  = require('multer'),
+    routes = require('./routes'),
+    httpProxy = require('http-proxy'),
+    wikiProxy = httpProxy.createProxyServer();
 
 /*ENV settings*/
 var connection_string = '127.0.0.1:27017/nodejs';
@@ -52,7 +55,7 @@ app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
 //import auth variables
-require('./handles/auth.js')(passport);
+require('./routes/auth.js').auth(passport);
 
 
 //=========== EJS routes ===========//
@@ -67,7 +70,6 @@ app.get('/auth/google',
     // The request will be redirected to Google for authentication, so this
     // function will not be called.
   });
-
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
@@ -85,60 +87,52 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-app.get('/admin/alumni/',ensureAuthenticated,ensureActive, function(req,res){
-  res.render('alumni', { user: req.user.name })
-})
-app.get('/admin/alumniMod/',ensureAuthenticated,ensureActive,function(req,res){
-  res.render('alumniMod', { user: req.user.name })
-})
-app.get('/admin/announcements/',ensureAuthenticated,ensureActive,function(req,res){
-  res.render('announcements', { user: req.user.name })
-})
-app.get('/admin/linkGenerator/',ensureAuthenticated,ensureActive,function(req,res){
-  res.render('linkGenerator', { user: req.user.name })
-})
-app.get('/admin/people/',ensureAuthenticated,ensureActive,function(req,res){
-  res.render('people', { user: req.user.name })
-})
-app.get('/admin/peopleMod/',ensureAuthenticated,ensureActive,function(req,res){
-  res.render('peopleMod', { user: req.user.name })
-})
-app.get('/admin/upload/',ensureAuthenticated,ensureActive,function(req,res){
-  res.render('upload', { user: req.user.name })
-})
-
 app.get('/profile',ensureAuthenticated,function(req,res){
   res.render('profile', req.user)
 })
 
 /* ==== Tutorial Routes ====*/
-app.get('/tutorial/getJournal',require('./handles/tutorial.js').getJournal);
-app.get('/tutorial/getPageById',require('./handles/tutorial.js').getPageById);
-app.get('/tutorial/getViews',require('./handles/tutorial.js').getViews);
-app.get('/tutorial/findPageByTagName',require('./handles/tutorial.js').findPageByTagName);
-app.post('/tutorial/newpage',require('./handles/tutorial.js').savePage);
+app.get('/tutorial/getJournal',routes.getJournal);
+app.get('/tutorial/getPageById',routes.getPageById);
+app.get('/tutorial/getViews',routes.getViews);
+app.get('/tutorial/findPageByTagName',routes.findPageByTagName);
+app.post('/tutorial/newpage',routes.savePage);
 app.get('/tutorial/getUser', ensureAuthenticated, function(req, res){
   res.send(JSON.stringify(req.user));
 })
-app.get('/tutorial/imageUpload',require('./handles/tutorial.js').getImageForm);
+app.get('/tutorial/imageUpload',routes.getImageForm);
 app.post('/tutorial/imageUpload',
   multer({dest:'public/usr/temp/'}).single('upload'),
-  require('./handles/tutorial.js').getPostImageData);
+  routes.getPostImageData);
 
-//=========== Express File Handle routes ===========//
-app.post('/inbound/newImage',function(req,res){
-  res.send('Not Supported, use url')});
-app.post('/inbound/newpage', require('./handles/newpage.js'));
-app.post('/inbound/update', require('./handles/updateJSON.js'));
-app.post('/inbound/newfile', require('./handles/newfile.js'));
-app.post('/inbound/modify', require('./handles/modifyJSON.js'));
-app.post('/changePassword',ensureAuthenticated, require('./handles/db_routines.js').changePass);
+//=========== Express Form Data routes ===========//
+app.get('/data/get', routes.getData);
+app.get('/data/getbyid', routes.getDataById);
+app.post('/data/newfile/', 
+  multer({dest:'public/usr/temp/'}).single('upload'),routes.uploadFile);
+
+app.post('/data/insert', 
+  multer({dest:'public/usr/temp/'}).single('upload'), routes.InsertData);
+
+app.post('/data/replace', 
+  multer({dest:'public/usr/temp/'}).single('upload'), routes.ReplaceData);
+
+app.post('/data/delete',routes.deleteData);
+
+app.post('/changePassword',ensureAuthenticated, routes.changePass);
+
+//wiki through proxy
+app.get("/wiki/*",function(req, res){
+wikiProxy.web(req, res, { target: 'http://mediawiki-shubham21.rhcloud.com/:80' });
+})
+
+//mongodb through middleware
 app.use("/", ensureAdmin, require("./mongodb/app.js"));  
 
 //Handle 500
-app.use(function(error, req, res, next) {
-res.status(500).send('500: Internal Server Error');
-});
+//app.use(function(error, req, res, next) {
+//res.status(500).send('500: Internal Server Error');
+//});
 
 
 var server = app.listen(server_port,server_ip_address, function () {

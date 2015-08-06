@@ -9,7 +9,7 @@ app.controller('HomeController', ['$scope', 'people_current',
 
 //ng-service
 app.factory('people_current', ['$http', function($http) 
-	{return $http.get('./../shared/data/members.json') 
+	{return $http.get('/data/member?units=-1') 
 	.success(function(data) {return data; }) 
 	.error(function(data) {return data; }); 
 }]); 

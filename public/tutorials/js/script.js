@@ -177,7 +177,7 @@ jQuery(document).ready(function ($) {
     // If edit then ...
     //while(! global_settings.hasOwnProperty("edit"));
 
-    if (edit_mode) {
+    if (global_settings.type == "edit") {
         f = page.fileid ;
         creater_id = page.__creater_id; 
         menuShortName = page.savePosition;

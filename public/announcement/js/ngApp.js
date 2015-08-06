@@ -27,7 +27,7 @@ app.controller('HomeController', ['$scope', 'announcements_all',
 
 //ng-service
 app.factory('announcements_all', ['$http', function($http) 
-	{return $http.get('./../shared/data/announcements.all.json') 
+	{return $http.get('/data/announcement?units=-1') 
 	.success(function(data) {return data; }) 
 	.error(function(data) {return data; }); 
 }]); 

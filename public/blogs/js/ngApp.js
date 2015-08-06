@@ -9,7 +9,7 @@ app.controller('HomeController', ['$scope', 'blogs_all',
 
 //ng-service
 app.factory('blogs_all', ['$http', function($http) 
-	{return $http.get('./../shared/data/posts.all.json') 
+	{return $http.get('/data/blog?units=-1') 
 	.success(function(data) {return data; }) 
 	.error(function(data) {return data; }); 
 }]); 

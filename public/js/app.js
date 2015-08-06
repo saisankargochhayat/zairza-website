@@ -28,12 +28,12 @@ app.filter('reverse', function() {
 });
 
 app.factory('announncement_recent',['$http',function($http){
-	return $http.get('./shared/data/announcements.recent.json')
+	return $http.get('/data/get?form=announcement&units=4')
 	.success(function(data){return data;})
 	.error(function(err){return err});
 }]);
 app.factory('posts_recent',['$http',function($http){
-	return $http.get('./shared/data/posts.recent.json')
+	return $http.get('/data/get?form=blog&units=4')
 	.success(function(data){return data;})
 	.error(function(err){return err});
 }]);
