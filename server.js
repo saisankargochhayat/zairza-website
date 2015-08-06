@@ -16,8 +16,7 @@ var express = require('express'),
     LocalStrategy = require('passport-local').Strategy,
     multer  = require('multer'),
     routes = require('./routes'),
-    httpProxy = require('http-proxy'),
-    wikiProxy = httpProxy.createProxyServer();
+    http = require('http');
 
 /*ENV settings*/
 var connection_string = '127.0.0.1:27017/nodejs';
@@ -122,9 +121,7 @@ app.post('/data/delete',routes.deleteData);
 app.post('/changePassword',ensureAuthenticated, routes.changePass);
 
 //wiki through proxy
-app.all("/wiki/*",function(req, res){
-wikiProxy.web(req, res, {target:'http://mediawiki-shubham21.rhcloud.com/'});
-})
+app.use('/wiki', wiki);
 
 //mongodb through middleware
 app.use("/", ensureAdmin, require("./mongodb/app.js"));  
@@ -159,4 +156,31 @@ function ensureAdmin(req, res, next) {
    if (req.user.IsActivated) { return next(); }
   }
   res.redirect('/login');
+}
+
+function wiki(req, res, next){
+  var response = '';
+
+    var options = {
+        host : 'mediawiki-shubham21.rhcloud.com',
+        //port : 3000,
+        path : req.path.split('/wiki').join(""),
+        method : req.method,
+        headers : req.headers
+    };
+
+    var call = http.request(options, function(resp) {
+        resp.on('data', function(d) {
+            response += d ;
+        });
+        resp.on('end', function(d) {
+            res.write(response);
+            res.end();
+        });
+    });
+
+    call.end();
+    call.on('error', function(e) {
+        text = "error";
+    });
 }
