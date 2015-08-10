@@ -122,7 +122,7 @@ app.post('/changePassword',ensureAuthenticated, routes.changePass);
 //mongodb through middleware
 app.use("/", ensureAdmin, require("./mongodb/app.js"));  
 
-Handle 500
+//Handle 500
 app.use(function(error, req, res, next) {
 res.status(500).send('500: Internal Server Error');
 });
