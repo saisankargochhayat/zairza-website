@@ -15,9 +15,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     LocalStrategy = require('passport-local').Strategy,
     multer  = require('multer'),
-    routes = require('./routes'),
-    httpProxy = require('http-proxy'),
-    wikiProxy = httpProxy.createProxyServer({});
+    routes = require('./routes');
 
 /*ENV settings*/
 var connection_string = '127.0.0.1:27017/nodejs';
@@ -121,18 +119,13 @@ app.post('/data/delete',routes.deleteData);
 
 app.post('/changePassword',ensureAuthenticated, routes.changePass);
 
-//wiki through proxy
-app.all("/wiki",function(req, res){
-wikiProxy.web(req, res, {target:{host:'mediawiki-shubham21.rhcloud.com', port:80}});
-})
-
 //mongodb through middleware
 app.use("/", ensureAdmin, require("./mongodb/app.js"));  
 
-//Handle 500
-//app.use(function(error, req, res, next) {
-//res.status(500).send('500: Internal Server Error');
-//});
+Handle 500
+app.use(function(error, req, res, next) {
+res.status(500).send('500: Internal Server Error');
+});
 
 
 var server = app.listen(server_port,server_ip_address, function () {
