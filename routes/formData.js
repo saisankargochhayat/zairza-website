@@ -14,8 +14,8 @@ exports.getData = function(req, res, next){
             } else{
                 var temp_data = [];
                 for (var i = 0; i < units; i++) {
-                    var __temp_data = data.pop() ;
-                    if (__temp_data) temp_data.push();
+                    var __temp_data = data.pop();
+                    if ((typeof __temp_data === "object") && (__temp_data !== null)) {temp_data.push(__temp_data);}
                 }
                  res.send(JSON.stringify(temp_data));
             }
