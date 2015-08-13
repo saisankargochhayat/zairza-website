@@ -2,6 +2,20 @@ var global_settings = {} ;
 
 var app = angular.module('MyAPP',['ngRoute']);
 
+var ensureLoggedIN = function (httpElement, callback) {
+	httpElement.get('/tutorial/getUser')
+	.success(function(data){
+		if (data.hasOwnProperty("IsActivated") && data.IsActivated ) {
+			if (typeof callback === 'function') {
+				callback(data);
+			}
+        }else{
+          alert("You need an ACTIVE account to perform this task")
+          window.location.replace("/login");
+        }  
+	})	
+}
+
 app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
 	.when('/profile',{
@@ -45,33 +59,33 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 app.controller("profile",["$scope","$http",function($scope, $http){
 	$scope.user = {};
-	$http.get('/tutorial/getUser')
-	.success(function(data){
+	ensureLoggedIN($http, function(data){
 		$scope.user = data;
-	})
+	});
 }])
 
-app.controller("admin",["$scope",function($scope){
-
+app.controller("admin",["$scope","$http",function($scope,$http){
+	ensureLoggedIN($http);
 }])
 
-app.controller("announcement",["$scope",function($scope){
-	
+app.controller("announcement",["$scope","$http",function($scope,$http){
+	ensureLoggedIN($http);
 }])
 
-app.controller("blogs",["$scope",function($scope){
-	
+app.controller("blogs",["$scope","$http",function($scope,$http){
+	ensureLoggedIN($http);
 }])
 
-app.controller("upload",["$scope",function($scope){
-	
+app.controller("upload",["$scope","$http",function($scope,$http){
+	ensureLoggedIN($http);
 }])
 
-app.controller("member",["$scope",function($scope){
-	
+app.controller("member",["$scope","$http",function($scope,$http){
+	ensureLoggedIN($http);
 }])
 
 app.controller('AlumniEditHomeController',['$scope','$http',function($scope,$http){
+	ensureLoggedIN($http);
 	$http.get(relFilePath).success(function(data){
 		$scope.members = data;
 		global_settings.file = $scope.members;
@@ -80,7 +94,7 @@ app.controller('AlumniEditHomeController',['$scope','$http',function($scope,$htt
 
 app.controller('AlumniEditFullViewController',['$scope','$http','$routeParams',
 	function($scope,$http,$routeParams){
-
+		ensureLoggedIN($http);
 	showMember = function(member){
 		document.getElementById('name').value = member.name;
 		document.getElementById('year').value = member.year;
@@ -96,6 +110,7 @@ app.controller('AlumniEditFullViewController',['$scope','$http','$routeParams',
 }]);
 
 app.controller('PeopleEditHomeController',['$scope','$http',function($scope,$http){
+	ensureLoggedIN($http);
 	$http.get(relFilePath).success(function(data){
 		$scope.members = data;
 		global_settings.file = $scope.members;
@@ -104,7 +119,7 @@ app.controller('PeopleEditHomeController',['$scope','$http',function($scope,$htt
 
 app.controller('PeopleEditFullViewController',['$scope','$http','$routeParams',
 	function($scope,$http,$routeParams){
-
+		ensureLoggedIN($http);
 	showMember = function(member){
 		document.getElementById('name').value = member.name
 		document.getElementById('link').value = member.link;

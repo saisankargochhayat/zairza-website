@@ -2,15 +2,15 @@
 <form method="post" enctype="multipart/form-data" action="/data/insert?form=alumni" name="upload">
 	<input type="text" class="form-control" name="name"  placeholder="Name"><br>
 	<input type="text" class="form-control" name="year"  placeholder="Passout batch"><br>
-	<input type="radio" id="rad1" name='link' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="radio" id="rad2" name='file'>Upload New Icon [max 200x200 pixels] 
-	<input type="text" class="form-control" name="img"  placeholder="link to icon eg /shared/images/yuna.jpg">
-	<input type="file" class="form-control" name="upload" accept="image/jpeg"><br>
+	<input type="radio" id="rad1" name='img-link' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="radio" id="rad2" name='file'>Upload New Icon [max 6kb 100x100 pixels] 
+	<input type="text" class="form-control" id="img-link" name="img" placeholder="link to icon eg /shared/images/yuna.jpg">
+	<input type="file" class="form-control" id="img-file" name="upload" accept="image/jpeg"><br>
 	<input type="text" class="form-control" name="wentTo"  placeholder="Currently Placed at.."><br>
 	<input type="telephone" class="form-control" name="phone"  placeholder="telephone"><br>
 	<input type="email" class="form-control" name="mail"  placeholder="Mail id"><br>
 	<input type="text" class="form-control" name="link"  placeholder="link to your website or Profile"><br>
-	<button type="button" class="btn btn-success btn-block">Submit</button>
+	<button type="submit" class="btn btn-success btn-block">Submit</button>
 </form>
 
 <script type="text/javascript">

@@ -1,14 +1,14 @@
 <h4>New Announcement Form</h4> 
-<form id="form_msg" class="from">
-	<input type="text" class="form-control" id="from"  placeholder="Your Name"><br>
-	<input type="date" class="form-control" id="date" placeholder="dd/mm/yyyy"><br>
-	<input type="text" class="form-control" id="title"  placeholder="Title"><br>
-	<input type="radio" id="rad1" name='imgck' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="radio" id="rad2" name='imgck'>Upload New Icon [max 200x200 pixels] 
-	<input type="text" class="form-control" id="img-link"  placeholder="link to icon eg /shared/images/yuna.jpg">
-	<input type="file" class="form-control" id="img-file" accept="image/jpeg"><br>
-	<textarea class="form-control" rows="3" id="body"  placeholder="Body"></textarea><br>
-	<button type="button" class="btn btn-success btn-block">Submit</button>
+<form method="post" enctype="multipart/form-data" action="/data/insert?form=announcement" name="upload">
+	<input type="text" class="form-control" name="from"  placeholder="Your Name"><br>
+	<input type="date" class="form-control" name="datetime" placeholder="dd/mm/yyyy"><br>
+	<input type="text" class="form-control" name="title"  placeholder="Title"><br>
+	<input type="radio" id="rad1" name='img-link' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="radio" id="rad2" name='file'>Upload New Icon [max 6kb 100x100 pixels] 
+	<input type="text" class="form-control" id="img-link" name="img" placeholder="link to icon eg /shared/images/yuna.jpg">
+	<input type="file" class="form-control" id="img-file" name="upload" accept="image/jpeg"><br>
+	<textarea class="form-control" rows="3" name="body"  placeholder="Message Body"></textarea><br>
+	<button type="submit" class="btn btn-success btn-block">Submit</button>
 </form>
 
 <script type="text/javascript">
