@@ -4,7 +4,7 @@
 }
 @font-face {
     font-family: atom;
-    src: url(fonts/ATOMICCLOCKRADIO.ttf);
+    src: url(fonts/ATOMICCLOCKRADIO.TTF);
 }
 .dotted{
     font-family: dottedFont;
