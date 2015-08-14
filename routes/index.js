@@ -6,6 +6,7 @@ exports.getJournal = tutorial.getJournal;
 exports.getPageById = tutorial.getPageById;
 exports.getViews = tutorial.getViews;
 exports.findPageByTagName = tutorial.findPageByTagName;
+exports.searchAllPages = tutorial.searchAllPages;
 exports.savePage = tutorial.savePage;
 exports.getImageForm = tutorial.getImageForm;
 exports.getPostImageData = tutorial.getPostImageData;

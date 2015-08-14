@@ -1,48 +1,72 @@
+<style type="text/css">
+.main_container{
+    padding-top: 10%;
+    background-image: url("./images/golden_ratio.png");
+    width:100%;
+    padding-bottom: 6%;
+}
+#searchform{
+    padding: 2% 0 4% 0;
+}
+#moreContent{
+    text-align: center;
+}
+#moreContent a{
+     color: #fff;
+     text-decoration: none;
+     font-size: 50px;
+}
 
-    <!-- top container showing blocks -->
-    <div class='container-fluid hidden-sm hidden-md hidden-xs' id='bodycontainer'>
+</style>
+   <!-- top container showing searrch and blocks -->
+<div class = "col-lg-10 main_container" id='bodycontainer'>
+    <form class="form-inline col-lg-6 col-lg-offset-3" id = "searchform" method="GET">
+            <input type="text" class="form-control" id="search" placeholder="Search our Tutorial Database" size="70%">
+            <button type="submit" class="form-control" size="30%" ng-click="submitData()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    </form>
+    <div class='container'>
         <div class='row' id="mainOuterRow">
-            <div class='col-lg-10 col-lg-offset-1'>
+            <div class='col-lg-12'>
                 <div class='row'>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                    <div class='col-lg-2 col-md-2 col-sm-4 col-xs-3 mainInnerDiv'>
                         <div>
-                            <a href="/tutorials/#/index#robotics" class='darken'>
-                                <img src="images/robotics.png">
+                            <a href="/tutorials/#/index/#robotics" class='darken'>
+                                <img class="img-responsive" src="images/robotics.png">
                             </a>
                         </div>
                     </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                    <div class='col-lg-2 col-md-2 col-sm-4 col-xs-3 mainInnerDiv'>
                         <div>
-                            <a href="/tutorials/#/index#software" class='darken'>
-                                <img src="images/software.png">
+                            <a href="/tutorials/#/index/#software" class='darken'>
+                                <img class="img-responsive" src="images/software.png">
                             </a>
                         </div>
                     </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                    <div class='col-lg-2 col-md-2 col-sm-4 col-xs-3 mainInnerDiv'>
                         <div>
-                            <a href="/tutorials/#/index#automobile" class='darken'>
-                                <img src="images/automobile.png">
+                            <a href="/tutorials/#/index/#automobile" class='darken'>
+                                <img class="img-responsive" src="images/automobile.png">
                             </a>
                         </div>
                     </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                    <div class='col-lg-2 col-md-2 col-sm-4 col-xs-3 mainInnerDiv'>
                         <div>
                             <a href="/projects/#onging" class='darken'>
-                                <img src="images/ongoing.png">
+                                <img class="img-responsive" src="images/ongoing.png">
                             </a>
                         </div>
                     </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                    <div class='col-lg-2 col-md-2 col-sm-4 col-xs-3 mainInnerDiv'>
                         <div>
                             <a href="/projects/" class='darken'>
-                                <img src="images/projects.png">
+                                <img class="img-responsive" src="images/projects.png">
                             </a>
                         </div>
                     </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
+                    <div class='col-lg-2 col-md-2 col-sm-4 col-xs-3 mainInnerDiv'>
                         <div>
                             <a href="/events/" class='darken'>
-                                <img src="images/event.png">
+                                <img class="img-responsive" src="images/event.png">
                             </a>
                         </div>
                     </div>
@@ -50,72 +74,25 @@
             </div>
         </div>
     </div>
-
-    <!-- fix for small devices -->
-    <div class='container hidden-lg' id='bodycontainer'>
-        <div class='row' id="mainOuterRow">
-            <div class='col-lg-10 col-lg-offset-1'>
-                <div class='row'>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
-                        <div>
-                            <a href="/tutorials/#/index#robotics" class='darken'>
-                                <img src="images/robotics.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
-                        <div>
-                            <a href="/tutorials/#/index#software" class='darken'>
-                                <img src="images/software.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
-                        <div>
-                            <a href="/tutorials/#/index#automobile" class='darken'>
-                                <img src="images/automobile.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
-                        <div>
-                            <a href="/projects/#onging" class='darken'>
-                                <img src="images/ongoing.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
-                        <div>
-                            <a href="/projects/" class='darken'>
-                                <img src="images/projects.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class='col-lg-4 col-md-6 col-sm-6 col-xs-6 mainInnerDiv'>
-                        <div>
-                            <a href="/events/" class='darken'>
-                                <img src="images/event.png">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <br><br>
+    <div id="moreContent">
+        <a href="/tutorials/#/index/#robotics">&nbsp;<span class="glyphicon glyphicon-collapse-down" aria-hidden="true">&nbsp;</a>
     </div>
+</div>
 
     <!--robotics header-->
-    <div class='container-fluid' id='robotics'>
+    <div class='container-fluid'>
         <div class='row'>
-            <div class='col-lg-12'>
+            <div class='col-lg-12' id='robotics'>
                 <div class='jumbotron'>
-                    <h1>Robotics</h1>
+                    <h1 class="dotted">Robotics</h1>
                     <hr>
                     <ul class="nav nav-pills">
-                        <li role="presentation"><a href="/tutorials/#/index#manual">Manual</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#avr">AVR</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#arduino">Arduino</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#elec">Electronics</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#misc">Miscellaneous</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#manual">Manual</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#avr">AVR</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#arduino">Arduino</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#elec">Electronics</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#misc">Miscellaneous</a></li>
                     </ul>
                 </div>
             </div>
@@ -183,17 +160,17 @@
     </div>
 
     <!--software header-->
-    <div class='container-fluid' id='software'>
+    <div class='container-fluid'>
         <div class='row'>
-            <div class='col-lg-12'>
+            <div class='col-lg-12' id='software'>
                 <div class='jumbotron'>
-                    <h1>Software</h1>
+                    <h1 class="dotted">Software</h1>
                     <hr>
                     <ul class="nav nav-pills">
-                        <li role="presentation"><a href="/tutorials/#/index#web">Web Development</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#lang">Languages</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#standalone">Standalone Apps</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#else">Everything Else</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#web">Web Development</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#lang">Languages</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#standalone">Standalone Apps</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#else">Everything Else</a></li>
                     </ul>
                 </div>
             </div>
@@ -250,16 +227,16 @@
     </div>
 
     <!--Automobile header-->
-    <div class='container-fluid' id='automobile'>
+    <div class='container-fluid'>
         <div class='row'>
-            <div class='col-lg-12'>
+            <div class='col-lg-12' id='automobile'>
                 <div class='jumbotron'>
-                    <h1>Automobile</h1>
+                    <h1 class="dotted">Automobile</h1>
                     <hr>
                     <ul class="nav nav-pills">
-                        <li role="presentation"><a href="/tutorials/#/index#sae">SAE</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#asme">ASME</a></li>
-                        <li role="presentation"><a href="/tutorials/#/index#Amisc">Miscellaneous</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#sae">SAE</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#asme">ASME</a></li>
+                        <li role="presentation"><a href="/tutorials/#/index/#Amisc">Miscellaneous</a></li>
                     </ul>
                 </div>
             </div>
@@ -303,26 +280,3 @@
             </div>
         </div>
     </div>
-
-<!-- ng-route is a living hell :(
-<script type="text/javascript">
-// smooth scrolling
-jQuery(document).ready(function($) {
-$(function() {
-  $('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top
-        }, 1000);
-        return false;
-      }
-    }
-  });
-});
-})
-</script>
-
--->

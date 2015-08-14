@@ -94,6 +94,7 @@ app.get('/tutorial/getJournal',routes.getJournal);
 app.get('/tutorial/getPageById',routes.getPageById);
 app.get('/tutorial/getViews',routes.getViews);
 app.get('/tutorial/findPageByTagName',routes.findPageByTagName);
+app.get('/tutorial/searchAllPages',routes.searchAllPages);
 app.post('/tutorial/newpage',routes.savePage);
 app.get('/tutorial/getUser', ensureAuthenticated, function(req, res){
   res.send(JSON.stringify(req.user));

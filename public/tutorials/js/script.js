@@ -24,6 +24,10 @@ app.config(["$routeProvider",function ($routeProvider) {
     controller : "tag",
     templateUrl: "./views/tagsearch.html"
   })
+  .when("/Search/:tagname",{
+    controller : "Search",
+    templateUrl: "./views/tagsearch.html"
+  })
   .otherwise(
     {redirectTo: '/index'}); 
 }])
@@ -49,6 +53,10 @@ app.controller("mainController",['$scope','$http',
         getJournalfromdb(typename);
         return temp_store[typename];
       }
+    }
+    $scope.submitData = function(){
+      var a = document.getElementById('search').value ;
+      window.location.href = "/tutorials/#/Search/"+a;
     }
   }]);
 
@@ -85,6 +93,20 @@ app.controller("tag",['$scope','$http','$routeParams',
     $scope.tag = tagname;
     $scope.pageMatch = [];
     $http.get("/tutorial/findPageByTagName?tagname="+tagname)
+      .success(function(data){
+        $scope.pageMatch = data;
+      })
+      .error(function(err){
+        console.log(err);
+      })
+  }])
+
+app.controller("Search",['$scope','$http','$routeParams',
+  function($scope, $http, $routeParams){
+    var tagname = $routeParams.tagname;
+    $scope.tag = tagname;
+    $scope.pageMatch = [];
+    $http.get("/tutorial/searchAllPages?tagname="+tagname)
       .success(function(data){
         $scope.pageMatch = data;
       })
@@ -148,7 +170,13 @@ app.controller("newpage",['$scope','$http','$routeParams',
 
 app.filter('htmlToPlaintext', function() {
     return function(text) {
-      return String(text).replace(/<[^>]+>/gm,'');
+      return String(text).replace(/<[^>]+>/gm,'').split("&nbsp;").join(" ");
+    };
+  })
+
+app.filter('previewText', function() {
+    return function(text) {
+      return String(text).substring(0,250) + "...";
     };
   })
 

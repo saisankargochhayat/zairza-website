@@ -187,5 +187,5 @@ exports.deleteData = function(req, res){
 }
 
 var Script = function (msg) {
-	return '<script>alert("'+msg+'");</script>' ;
+	return '<script>alert("'+msg+'");window.location.href = "/admin/";</script>' ;
 }

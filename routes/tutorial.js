@@ -80,9 +80,46 @@ exports.findPageByTagName = function(request,response){
     var tagname = request.query.tagname;
     Page.find({tagfield: {$in:[tagname]}},function(err, pageArray){
         if (err){
-          console.error("Error:tag search\n"+err) 
+          console.error("Error:tag search\n"+err);
           response.status(500).send("Tag Search Error");
         }else response.send(JSON.stringify(pageArray));
+    })
+}
+
+var filterHTML = function (string) {
+    var a = string.split(/\s+/).join("|").replace(/(<([^>]+)>)/ig,"|").replace(/,+/,"|").split("|");
+    var res = [] ;
+    a.forEach(function(e,i,arr){
+        if (e.length > 0) {res.push(e)};
+    })
+    return res ;
+} 
+var search = function(string, queryTerm){
+    var arr = filterHTML(string);
+    if(arr.indexOf(queryTerm) != -1){return true ;}
+    else {return false ;}
+}
+
+exports.searchAllPages = function(request,response){
+    var tagname = request.query.tagname;
+    var result = [] ;
+    var fields = ["title", "tagfield", "contributers", "mainbody"] ;
+    Page.find(function(err, data){
+        if (err){
+          console.error("Error:tag search\n"+err); 
+          response.status(500).send("Tag Search Error");
+        }else {
+            data.forEach(function(page, indx, arr){
+                fields.forEach(function(field, field_index, array){
+                    var str = page[field].toString();
+                    if (search(str,tagname)) {
+                        console.log("+");
+                        if (result.indexOf(page) == -1) {result.push(page)};
+                    }
+                })
+            })
+            response.send(JSON.stringify(result));
+        }
     })
 }
 

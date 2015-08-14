@@ -1,6 +1,28 @@
+@font-face {
+    font-family: dottedFont;
+    src: url(fonts/Clubland.ttf);
+}
+@font-face {
+    font-family: atom;
+    src: url(fonts/ATOMICCLOCKRADIO.ttf);
+}
+.dotted{
+    font-family: dottedFont;
+}
 .container-fluid{
     padding-left:0;
     padding-right:0;
+}
+#zairzaLogo{
+    font-family: atom;
+    color: #27a7df;
+    float : right;
+    padding-top: 2% ;
+    padding-right: 5%;
+    font-size: 50px;
+}
+#zairzaLogo:hover{
+    text-decoration: none;
 }
 #navblue{
     color:#27a7df;
