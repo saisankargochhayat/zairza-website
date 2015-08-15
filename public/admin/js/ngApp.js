@@ -96,13 +96,15 @@ app.controller('AlumniEditFullViewController',['$scope','$http','$routeParams',
 	function($scope,$http,$routeParams){
 		ensureLoggedIN($http);
 	showMember = function(member){
-		document.getElementById('name').value = member.name;
-		document.getElementById('year').value = member.year;
-		document.getElementById('wentTo').value = member.wentTo;
-		document.getElementById('phone').value = member.phone;
-		document.getElementById('mail').value = member.mail;
-		document.getElementById('link').value = member.link;
-		document.getElementById('img-link').value = member.img;
+		document.getElementsByName("alumni_update_main")[0].action = "/data/replace?form=alumni&id="+member._id ;
+		document.getElementsByName("alumni_update_delete_entry")[0].action = "/data/delete?form=alumni&id="+member._id ; 
+		document.getElementsByName('name')[0].value = member.name;
+		document.getElementsByName('year')[0].value = member.year;
+		document.getElementsByName('wentTo')[0].value = member.wentTo;
+		document.getElementsByName('phone')[0].value = member.phone;
+		document.getElementsByName('mail')[0].value = member.mail;
+		document.getElementsByName('link')[0].value = member.link;
+		document.getElementsByName('img')[0].value = member.img;
 	}
 	if (!global_settings.file) {alert("Nothing to change! \nGo back and select something")}
 	else showMember(global_settings.file[$routeParams.id]);
@@ -121,9 +123,11 @@ app.controller('PeopleEditFullViewController',['$scope','$http','$routeParams',
 	function($scope,$http,$routeParams){
 		ensureLoggedIN($http);
 	showMember = function(member){
-		document.getElementById('name').value = member.name
-		document.getElementById('link').value = member.link;
-		document.getElementById('img-link').value = member.img;
+		document.getElementsByName("people_update_main")[0].action = "/data/replace?form=member&id="+member._id ;
+		document.getElementsByName("people_update_delete_entry")[0].action = "/data/delete?form=member&id="+member._id ; 
+		document.getElementsByName('name')[0].value = member.name
+		document.getElementsByName('link')[0].value = member.link;
+		document.getElementsByName('img')[0].value = member.img;
 	}
 	if (!global_settings.file) {alert("Nothing to change! \nGo back and select something")}
 	else showMember(global_settings.file[$routeParams.id]);

@@ -96,7 +96,7 @@ app.get('/tutorial/getViews',routes.getViews);
 app.get('/tutorial/findPageByTagName',routes.findPageByTagName);
 app.get('/tutorial/searchAllPages',routes.searchAllPages);
 app.post('/tutorial/newpage',routes.savePage);
-app.get('/tutorial/getUser', ensureAuthenticated, function(req, res){
+app.get('/tutorial/getUser', ensureActive, function(req, res){
   res.send(JSON.stringify(req.user));
 })
 app.get('/tutorial/imageUpload',routes.getImageForm);
@@ -144,13 +144,15 @@ function ensureAuthenticated(req, res, next) {
 }
 
 function ensureActive(req, res, next) {
-  if (req.user.IsActivated) { return next(); }
+  if (req.isAuthenticated()){
+    if (req.user.IsActivated) { return next(); }
+  }
   res.redirect('/login');
 }
 
 function ensureAdmin(req, res, next) {
   if (req.isAuthenticated()) { 
-   if (req.user.IsActivated) { return next(); }
+   if (req.user.IsAdmin) { return next(); }
   }
   res.redirect('/login');
 }

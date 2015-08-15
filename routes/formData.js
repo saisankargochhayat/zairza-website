@@ -1,6 +1,6 @@
 var dbModel = require("./formData_model.js"),
     fs = require("fs");
-    
+
 exports.getData = function(req, res, next){
     var form = req.query.form,
         units = parseInt(req.query.units);
@@ -99,10 +99,9 @@ exports.InsertData = function (req, res) {
     }
 }
 
-exports.uploadFile = function(req, res){
-	var target = req.body.target ;
+exports.uploadFile = function(req, res){ 
 	var tmp_path = req.file.path;
-    var target_path = target + req.file.originalname ;
+    var target_path = process.cwd()+"/public/upload/"+ req.file.originalname ;
     var src = fs.createReadStream(tmp_path);
     var dest = fs.createWriteStream(target_path);
     src.pipe(dest);
@@ -118,14 +117,17 @@ exports.uploadFile = function(req, res){
 }
 
 exports.ReplaceData = function(req, res){
+    console.log("ok");
     var form = req.query.form,
         id = req.query.id;
-    dbModel.collection[form].findById(id,function(err, data){
+        body = req.body;
+    dbModel.collection[form].findOne({_id:id},function(err, data){
+        console.log("data=");console.log(data);
         if (err) {console.log("Error searching replace item\n"+err)
             res.send(Script("Error, try again later"))
         }else{
                 //if img_src is file then perform file shift operation 
-            if (req.body.file == "on") {
+            if (body.file == "on") {
                 var tmp_path = req.file.path;
                 var now = Date.now();
                 //date atribute to make each upload unique
@@ -135,32 +137,10 @@ exports.ReplaceData = function(req, res){
                 var url = "/usr/images/" + now + req.file.originalname ;
                 src.pipe(dest);
                 src.on('end', function() {
-                    req.body.img = url;
-                    for(var i in data){
-                        if (req.body.hasOwnProperty(data[i])) {
-                            data[data[i]] = req.body[data[i]]
-                        }
-                        data.save(function(err){
-                            if (err) {
-                                console.log("Error saving replaced item\n"+err) 
-                                res.send(Script("Error, try again later")) 
-                            } else{
-                                res.send(Script("success")) ;
-                            }
-                        })
-                    }
-                })
-                src.on('error', function(err) {
-                    if (err) {
-                        console.log("Error saving replaced img\n"+err)
-                        res.send(Script("Error, try again later"))
-                    }
-                })
-            }else{
-                for(var i in data){
-                    if (req.body.hasOwnProperty(data[i])) {
-                        data[data[i]] = req.body[data[i]]
-                    }
+                    body.img = url;
+                    Object.getOwnPropertyNames(body).forEach(function(val, idx, array) {
+                        data[val] = body[val]
+                    });  
                     data.save(function(err){
                         if (err) {
                             console.log("Error saving replaced item\n"+err) 
@@ -169,7 +149,27 @@ exports.ReplaceData = function(req, res){
                             res.send(Script("success")) ;
                         }
                     })
-                }
+                    
+                })
+                src.on('error', function(err) {
+                    if (err) {
+                        console.log("Error saving replaced img\n"+err)
+                        res.send(Script("Error, try again later"))
+                    }
+                })
+            }else{                
+                Object.getOwnPropertyNames(body).forEach(function(val, idx, array) {
+                    data[val] = body[val]
+                });
+                data.save(function(err){
+                    if (err) {
+                        console.log("Error saving replaced item\n"+err) 
+                        res.send(Script("Error, try again later")) 
+                    } else{
+                        res.send(Script("success")) ;
+                    }
+                })
+                
             }
         }
     })
@@ -178,9 +178,9 @@ exports.ReplaceData = function(req, res){
 exports.deleteData = function(req, res){
 	var form = req.query.form;
     var id = req.query.id;
-    dbModel.collection[form].remove({_id:objectId(id)},function(err){
+    dbModel.collection[form].remove({_id:id},function(err){
         if (err) {
-            console.log("Error Deliting\n"+err)
+            console.log("Error Deleting\n"+err)
             res.send(Script("Error, try again later"))
         } else{res.send(Script("success"))};
     })

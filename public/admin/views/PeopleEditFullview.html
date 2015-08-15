@@ -1,15 +1,15 @@
 <h4>Select an entry to edit</h4> 
-<form id="form_msg" class="from">
-	<input type="text" class="form-control" id="name"  placeholder="Name"><br>
-	<input type="radio" id="rad1" name='imgck' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="radio" id="rad2" name='imgck'>Upload New Icon [max 200x200 pixels] 
-	<input type="text" class="form-control" id="img-link"  placeholder="link to icon eg /shared/images/yuna.jpg">
-	<input type="file" class="form-control" id="img-file" accept="image/jpeg"><br>
-	<input type="text" class="form-control" id="link"  placeholder="link to your website or Profile"><br>
-	<button type="button" class="btn btn-success btn-block">Submit changes</button>
+<form method="post" enctype="multipart/form-data" action="" name="people_update_main">
+	<input type="text" class="form-control" name="name"  placeholder="Your Name"><br>
+    <input type="radio" id="rad1" name='img-link' checked>Use Link&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" id="rad2" name='file'>Upload New Icon [max 6kb 100x100 pixels] 
+    <input type="text" class="form-control" id="img-link" name="img" placeholder="link to icon eg /shared/images/yuna.jpg">
+    <input type="file" class="form-control" id="img-file" name="upload" accept="image/jpeg"><br>
+    <input type="text" class="form-control" name="link"  placeholder="link to your Homepage eg /usr/myProfile.htm"><br>
+    <button type="submit" class="btn btn-success btn-block" >Submit </button>
 </form>
-<form>
-	<button type="button" class="btn btn-danger btn-block">
+<form method="post" action="" name="people_update_delete_entry">
+	<button type="submit" class="btn btn-danger btn-block">
 		Delete Permanently
 	</button>
 </form>
