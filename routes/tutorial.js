@@ -187,8 +187,9 @@ exports.getPostImageData = function(req, res){
     var dest = fs.createWriteStream(target_path);
     var url = "./images/uploaded/" + now + req.file.originalname ;
     src.pipe(dest);
-    src.on('end', function() { res.send("<script>window.parent.CKEDITOR.tools.callFunction("
-        + CKEditorFuncNum +", \"" + url + "\");</script>")});
+    var reply = '<script>window.parent.CKEDITOR.tools.callFunction('
+            + CKEditorFuncNum +', "' + url + '");</script>' ;
+    src.on('end', function() { res.send(reply.toString())});
     src.on('error', function(err) { res.send('Error, try again'); });
     }else{
         res.send("this feature is supported only on Main body")
