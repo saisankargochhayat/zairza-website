@@ -32,22 +32,30 @@ var member = new Schema({
 	img : String
 },{safe:{ j: 1, w: 1, wtimeout: 10000 }})
 
+var newsletter = new Schema({
+	issue : String,
+	img : String
+},{safe:{ j: 1, w: 1, wtimeout: 10000 }})
+
 var Alumni = mongoose.model("alumni", alumni),
 	Announcement = mongoose.model("announcement", announcement),
 	Member = mongoose.model("member", member),
-	Blog = mongoose.model("blog", blog);
+	Blog = mongoose.model("blog", blog),
+	newsletter = mongoose.model("newsletter", newsletter);
 
 exports.expected_fields = {
 	alumni : ["name","year","wentTo","phone","mail","link","img"],
 	announcement : ["from","datetime","title","body","img"],
 	member : ["name","link","img"],
-	blog : ["author","title","link","img"]
+	blog : ["author","title","link","img"],
+	newsletter : ["issue","img"]
 }
 
 exports.collection = {
 	alumni : Alumni,
 	announcement : Announcement,
 	member : Member,
-	blog : Blog
+	blog : Blog,
+	newsletter : newsletter
 }
 

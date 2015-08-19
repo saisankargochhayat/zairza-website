@@ -53,6 +53,17 @@ app.config(['$routeProvider', function ($routeProvider) {
 		{controller: 'PeopleEditFullViewController', 
 		templateUrl: 'views/PeopleEditFullview.html'})
 
+	//newsletter
+	.when('/newsletter',{
+		controller: "newsletter", 
+		templateUrl: "views/newsletter.html"})
+	.when('/NewsEditFullView', 
+		{controller: "NewsEditHomeController", 
+		templateUrl: "views/NewsEditHome.html"}) 
+	.when('/NewsEditFullView/:id', 
+		{controller: 'NewsEditFullViewController', 
+		templateUrl: 'views/NewsEditFullview.html'})
+
 	.otherwise(
 		{redirectTo: '/profile'}); 
 }]);
@@ -125,8 +136,34 @@ app.controller('PeopleEditFullViewController',['$scope','$http','$routeParams',
 	showMember = function(member){
 		document.getElementsByName("people_update_main")[0].action = "/data/replace?form=member&id="+member._id ;
 		document.getElementsByName("people_update_delete_entry")[0].action = "/data/delete?form=member&id="+member._id ; 
-		document.getElementsByName('name')[0].value = member.name
+		document.getElementsByName('name')[0].value = member.name;
 		document.getElementsByName('link')[0].value = member.link;
+		document.getElementsByName('img')[0].value = member.img;
+	}
+	if (!global_settings.file) {alert("Nothing to change! \nGo back and select something")}
+	else showMember(global_settings.file[$routeParams.id]);
+	
+}]);
+
+app.controller("newsletter",["$scope","$http",function($scope,$http){
+	ensureLoggedIN($http);
+}])
+
+app.controller('NewsEditHomeController',['$scope','$http',function($scope,$http){
+	ensureLoggedIN($http);
+	$http.get("/data/get?form=newsletter&units=-1").success(function(data){
+		$scope.members = data;
+		global_settings.file = $scope.members;
+	}).error(function(err){console.log("readErr:"+err)});
+}]);
+
+app.controller('NewsEditFullViewController',['$scope','$http','$routeParams',
+	function($scope,$http,$routeParams){
+		ensureLoggedIN($http);
+	showMember = function(member){
+		document.getElementsByName("news_update_main")[0].action = "/data/replace?form=newsletter&id="+member._id ;
+		document.getElementsByName("news_update_delete_entry")[0].action = "/data/delete?form=newsletter&id="+member._id ; 
+		document.getElementsByName('issue')[0].value = member.issue;
 		document.getElementsByName('img')[0].value = member.img;
 	}
 	if (!global_settings.file) {alert("Nothing to change! \nGo back and select something")}
