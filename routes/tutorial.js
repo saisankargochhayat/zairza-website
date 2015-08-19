@@ -90,13 +90,13 @@ var filterHTML = function (string) {
     var a = string.split(/\s+/).join("|").replace(/(<([^>]+)>)/ig,"|").replace(/,+/,"|").split("|");
     var res = [] ;
     a.forEach(function(e,i,arr){
-        if (e.length > 0) {res.push(e)};
+        if (e.length > 0) {res.push(e.toLowerCase())};
     })
     return res ;
 } 
 var search = function(string, queryTerm){
     var arr = filterHTML(string);
-    if(arr.indexOf(queryTerm) != -1){return true ;}
+    if(arr.indexOf(queryTerm.toLowerCase()) != -1){return true ;}
     else {return false ;}
 }
 

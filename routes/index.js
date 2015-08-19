@@ -1,6 +1,7 @@
 var auth = require("./auth.js"),
 	form = require("./formData.js"),
 	tutorial = require("./tutorial.js");
+	files = require("./readFileNames.js")
 
 exports.getJournal = tutorial.getJournal;
 exports.getPageById = tutorial.getPageById;
@@ -19,3 +20,5 @@ exports.ReplaceData = form.ReplaceData;
 exports.deleteData = form.deleteData;
 
 exports.changePass = auth.changePass;
+
+exports.showFiles = files.showFiles;

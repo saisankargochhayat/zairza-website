@@ -15,7 +15,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     LocalStrategy = require('passport-local').Strategy,
     multer  = require('multer'),
-    routes = require('./routes');
+    routes = require('./routes'),
+    MongoStore = require('connect-mongo')(session);
 
 /*ENV settings*/
 var connection_string = '127.0.0.1:27017/nodejs';
@@ -45,7 +46,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(logger('dev'));
-app.use(session({ secret: 'keyboard cat',  saveUninitialized: true, resave: true}));
+app.use(session({ secret: 'keyboard cat', store: new MongoStore({ mongooseConnection: mongoose.connection }), saveUninitialized: true, resave: true}));
 //passport setup
 app.use(passport.initialize());
 app.use(passport.session());
@@ -120,6 +121,10 @@ app.post('/data/delete',routes.deleteData);
 
 app.post('/changePassword',ensureAuthenticated, routes.changePass);
 
+app.get(/upload/, function(req, res){
+  res.render("upload",{});
+})
+app.get('/showFiles', routes.showFiles);
 //mongodb through middleware
 app.use("/", ensureAdmin, require("./mongodb/app.js"));  
 
@@ -131,6 +136,13 @@ res.status(500).send('500: Internal Server Error');
 
 var server = app.listen(server_port,server_ip_address, function () {
     console.log("listening on "+server_ip_address+":"+server_port);
+});
+
+//handle sigterm
+process.on('SIGTERM', function () {
+  server.close(function () {
+    process.exit(0);
+  });
 });
 
 // Simple route middleware to ensure user is authenticated.

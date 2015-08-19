@@ -33,3 +33,8 @@ div.col-lg-2#mainSideBar li :hover{
   padding: 2% 15% 2% 15% ;
 
 }
+
+#home{
+  float: right;
+  margin-right: 5%;
+}
