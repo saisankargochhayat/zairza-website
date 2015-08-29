@@ -1,4 +1,4 @@
 node_modules/*
 mongodb/node_modules/*
-/public/usr/*
-help.md
+/public/usr/temp/*
+npm-debug.log

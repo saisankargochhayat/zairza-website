@@ -11,7 +11,7 @@ var _page = new Schema({
     contributers : String,
     mainbody : String,
     tagfield : Array
-});
+},{safe:{ j: 1, w: 1, wtimeout: 10000 }});
 
 _page.methods.removeFormatting = function (str) {
     return str.split(/<\/*\w*>/).join('');

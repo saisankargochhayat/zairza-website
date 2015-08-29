@@ -13,7 +13,7 @@ var Account = new Schema({
     password : String,
     IsActivated : Boolean, 
     IsAdmin : Boolean 
-});
+},{safe:{ j: 1, w: 1, wtimeout: 10000 }});
 
 
 Account.methods.generateHash = function(password) {
@@ -30,7 +30,7 @@ var User = mongoose.model('User', Account);
 exports.User = User;
 
 var callback_domain = "http://127.0.0.1:3000";
-if (process.env.OPENSHIFT_NODEJS_IP) {callback_domain = "http://nodejs-shubham21.rhcloud.com"};
+if (process.env.OPENSHIFT_NODEJS_IP) {callback_domain = "http://zairza.in"};
 
 exports.auth = function(passport) {
 

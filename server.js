@@ -16,7 +16,9 @@ var express = require('express'),
     LocalStrategy = require('passport-local').Strategy,
     multer  = require('multer'),
     routes = require('./routes'),
-    MongoStore = require('connect-mongo')(session);
+    MongoStore = require('connect-mongo')(session),
+    mongo_exp = require('./db'),
+    config = require('./config.js');
 
 /*ENV settings*/
 var connection_string = '127.0.0.1:27017/nodejs';
@@ -126,11 +128,17 @@ app.get(/upload/, function(req, res){
 })
 app.get('/showFiles', routes.showFiles);
 //mongodb through middleware
-app.use("/", ensureAdmin, require("./mongodb/app.js"));  
+//app.use("/", ensureAdmin, require("./mongodb/app.js"));  
+app.use('/admin/mongodb/', ensureAdmin, mongo_exp(config));
 
 //Handle 500
 app.use(function(error, req, res, next) {
 res.status(500).send('500: Internal Server Error');
+});
+// Handle 404
+app.use(function(req, res){
+  res.status(404);
+  res.render('404',{});
 });
 
 
