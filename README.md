@@ -1,71 +1,40 @@
-# zairza_new
+# ZAIRZA Website home 
 
-to install dependencies use npm install
+This repository holds
+  - static pages
+  - /db folder contains resouces to administer mongodb instance 
+  - /routes contains dynamic handles
 
+### Before begining development you need
+ - GIT
+ - mongodb
+ - nodejs
+ - patience
+> First ask admin to add you as collaborator. Maybe you have access that's why you can see this file
+> git clone this url https://github.com/shubham2192/zairza-website.git
 
+### Installation
+Install dependency by using 
+```sh
+$ npm install 
+```
+Open a new terminal and check if mongo service is running by typing 
+```sh
+$ mongo
+```
+start mongo service if needed by typing  
+```sh
+$ mongod
+```
+start server 
+```sh
+$ node server.js
+OR
+$ npm start
+```
+### Pull Requests
+>Use seperate pull request to resolve different bugs.
+Always keep your branch upto date with the master so conflict don't occour.
 
-----------------------------------------
-development phase II
-
--> Server changed to express4 
--> key based authentication replaced by 
-   google plus Auth2.0 for better utility
--> automated page generation towards completion
-
-----------------------------------------
-development phase I
-
-[ fix ]
--> Allpages in pagesDev
-
-[ fix ]
--> search in blogs
--> images in addlinks
-
-[new]
--> Modify Alumni
--> Modify people
-
-[ fix ]
-Alumni Section
-
-[ new ]
--> people
--> Alumni
--> About
-
-[ fix ]
--> Initial Blogs and Announcements
-
-[ fix ]
--> fix search to google custom search
--> fix search to bootstrap format
-
-[ new ]
--> Add people
--> Add alumni
-
-[ fix ]
--> make data link accesible to all upload pages
-
-[ fix ]
--> Announcements Page for mobile view
-
-[ fix ]
--> make carousal on front page
-
-[update:minor]
--> package.json and rhserver.js created to support hosting on 
-   redhat openshift server. Original server is retained to
-   support local testing
-
-[update:major]
--> The page is now Dynamic
--> Server created for node.js
--> Dynamic modification is now possible
-
-
-[update:minor]
--> New page for all announcements created 
--> common modules have been grouped together
--> Editable data moved out json files
+### Contact Us at cet.sac.zairza@gmail.com
+### All left reserved (c) Zairza Technical Society , CET bhubaneswar
