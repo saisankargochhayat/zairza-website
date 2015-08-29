@@ -10,8 +10,9 @@ This repository holds
  - mongodb
  - nodejs
  - patience
-> First ask admin to add you as collaborator. Maybe you have access that's why you can see this file
-> git clone this url https://github.com/shubham2192/zairza-website.git
+
+_First ask admin to add you as collaborator. Maybe you have access that's why you can see this file_
+_git clone this url https://github.com/shubham2192/zairza-website.git_
 
 ### Installation
 Install dependency by using 
@@ -33,8 +34,8 @@ OR
 $ npm start
 ```
 ### Pull Requests
->Use seperate pull request to resolve different bugs.
-Always keep your branch upto date with the master so conflict don't occour.
+_Use seperate pull request to resolve different bugs._
+_Always keep your branch upto date with the master so conflict don't occour._
 
 ### Contact Us at cet.sac.zairza@gmail.com
 ### All left reserved (c) Zairza Technical Society , CET bhubaneswar
