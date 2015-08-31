@@ -127,6 +127,12 @@ app.get(/upload/, function(req, res){
   res.render("upload",{});
 })
 app.get('/showFiles', routes.showFiles);
+
+
+/*backup and restore*/
+app.get('/_backup_', routes.backup);
+app.get('/_restore_', routes.restore);
+
 //mongodb through middleware
 //app.use("/", ensureAdmin, require("./mongodb/app.js"));  
 app.use('/admin/mongodb/', ensureAdmin, mongo_exp(config));
