@@ -1,6 +1,6 @@
 var global_settings = {} ;
 
-var app = angular.module('MyAPP',['ngRoute']);
+var app = angular.module('MyAPP',['ngRoute','chieffancypants.loadingBar', 'ngAnimate']);
 
 var ensureLoggedIN = function (httpElement, callback) {
 	httpElement.get('/tutorial/getUser')
@@ -15,6 +15,9 @@ var ensureLoggedIN = function (httpElement, callback) {
         }  
 	})	
 }
+app.config(function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = true;
+});
 
 app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider

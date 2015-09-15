@@ -154,6 +154,8 @@ var server = app.listen(server_port,server_ip_address, function () {
 
 //handle sigterm
 process.on('SIGTERM', function () {
+  var b = routes.backup ;
+  try { b() ; } catch (err) { console.log(err);}
   server.close(function () {
     process.exit(0);
   });

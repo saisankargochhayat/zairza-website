@@ -6,7 +6,7 @@ var blog = new Schema({
 	title : String ,
 	link : String ,
 	img : String ,
-},{safe:{ j: 1, w: 1, wtimeout: 10000 }})
+})
 
 var alumni = new Schema({
 	name : String,
@@ -16,7 +16,7 @@ var alumni = new Schema({
 	mail : String,
 	link : String,
 	img : String
-},{safe:{ j: 1, w: 1, wtimeout: 10000 }})
+})
 
 var announcement = new Schema({
 	from : String,
@@ -24,18 +24,18 @@ var announcement = new Schema({
 	title : String,
 	body : String,
 	img : String
-},{safe:{ j: 1, w: 1, wtimeout: 10000 }})
+})
 
 var member = new Schema({
 	name : String,
 	link : String,
 	img : String
-},{safe:{ j: 1, w: 1, wtimeout: 10000 }})
+})
 
 var newsletter = new Schema({
 	issue : String,
 	img : String
-},{safe:{ j: 1, w: 1, wtimeout: 10000 }})
+})
 
 var Alumni = mongoose.model("alumni", alumni),
 	Announcement = mongoose.model("announcement", announcement),

@@ -13,7 +13,7 @@ var Account = new Schema({
     password : String,
     IsActivated : Boolean, 
     IsAdmin : Boolean 
-},{safe:{ j: 1, w: 1, wtimeout: 10000 }});
+});
 
 
 Account.methods.generateHash = function(password) {

@@ -57,7 +57,9 @@
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES * * */
         var disqus_shortname = 'zairza';
-    
+        var disqus_identifier = window.location.hash.split("#").join("");
+        var disqus_url = window.location.origin + disqus_identifier ;
+        
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

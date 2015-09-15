@@ -1,6 +1,10 @@
 var global_settings = {type:null} ;
 
-var app = angular.module("ngApp",["ngRoute"]);
+var app = angular.module("ngApp",["ngRoute",'chieffancypants.loadingBar', 'ngAnimate']);
+
+app.config(function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = true;
+});
 
 app.config(["$routeProvider",function ($routeProvider) {
   $routeProvider
@@ -74,6 +78,7 @@ app.controller("display",['$scope','$http','$routeParams','$sce',
           $sce.trustAsHtml($scope.page.title);
         $scope.page.mainbody = 
           $sce.trustAsHtml($scope.page.mainbody);
+
       })
       .error(function(err){
         console.log(err);
