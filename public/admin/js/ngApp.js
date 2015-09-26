@@ -39,6 +39,11 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when('/upload',{
 		controller: "upload", 
 		templateUrl: "views/upload.html"})
+	.when('/image',{
+		controller:"imagechange",
+		templateUrl:"views/Forms.html"
+	})
+
 
 	//alumnimod
 	.when('/AlumniEditFullView', 
@@ -70,6 +75,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.otherwise(
 		{redirectTo: '/profile'}); 
 }]);
+
+app.controller("imagechange",["$scope","$http",function($scope,$http){
+	ensureLoggedIN($http);
+}])
 
 app.controller("profile",["$scope","$http",function($scope, $http){
 	$scope.user = {};

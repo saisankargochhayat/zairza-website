@@ -23,6 +23,6 @@ exports.deleteData = form.deleteData;
 exports.changePass = auth.changePass;
 
 exports.showFiles = files.showFiles;
-
+exports.ChangeCarousel = form.ChangeCarousel;
 exports.backup = backAres.backup ;
 exports.restore = backAres.restore ;

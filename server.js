@@ -119,6 +119,9 @@ app.post('/data/insert',
 app.post('/data/replace', 
   multer({dest:'public/usr/temp/'}).single('upload'), routes.ReplaceData);
 
+app.post('/data/changeImage/', 
+  multer({dest:'public/usr/temp/'}).single('upload'), routes.ChangeCarousel);
+
 app.post('/data/delete',routes.deleteData);
 
 app.post('/changePassword',ensureAuthenticated, routes.changePass);

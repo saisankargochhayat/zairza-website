@@ -36,6 +36,23 @@ exports.getDataById = function(req, res){
     })
 }
 
+exports.ChangeCarousel = function(req,res){
+
+    var tmp_path = req.file.path;
+    var target_path = process.cwd()+"/public/images/"+ req.body.pictures+".png" ;
+    var src = fs.createReadStream(tmp_path);
+    var dest = fs.createWriteStream(target_path);
+    src.pipe(dest);
+    src.on('end', function() {
+        res.send(Script("success"))
+    })
+    src.on('error', function(err) {
+        if (err) {
+            console.log("Error saving new file\n"+err)
+            res.send(Script("Error, try again later"))
+        }
+    })
+}
 exports.InsertData = function (req, res) {
 	var form = req.query.form ;
 	//iterate through request to find required fields
